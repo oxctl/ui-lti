@@ -1,6 +1,6 @@
 {
   "name": "ui-lti",
-  "version": "1.0.0",
+  "version": "0.0.8",
   "author": "Bisola A",
   "description": "common ui components used accross our canvas platforms",
   "main": "dist/index.js",
@@ -8,31 +8,25 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "build-lib": "rollup -c"
+    "build-lib": "rollup -c",
+    "test": "jest --config ./jest.config.json"
   },
   "dependencies": {
-    "@instructure/canvas-theme": "^8.2.1",
-    "@instructure/emotion": "^8.2.1",
     "@instructure/ui-billboard": "^8.2.1",
-    "@instructure/ui-heading": "^8.2.1",
-    "@instructure/ui-icons": "^8.2.1",
-    "@instructure/ui-modal": "^8.2.1",
-    "@instructure/ui-spinner": "^8.2.1",
-    "@instructure/ui-svg-images": "^8.2.1",
-    "@instructure/ui-text": "^8.2.1",
-    "@instructure/ui-themeable": "^7.5.1",
-    "@instructure/ui-themes": "^8.2.1",
-    "@instructure/ui-view": "^8.2.1"
+    "@instructure/ui-modal": "^8.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/plugin-syntax-class-properties": "^7.12.13",
     "@babel/preset-react": "^7.13.13",
+    "@instructure/emotion": "^8.2.1",
     "@instructure/ui-babel-preset": "^8.2.1",
     "@instructure/ui-eslint-config": "^8.2.1",
     "@instructure/ui-scripts": "^8.2.1",
+    "@instructure/ui-spinner": "^8.2.1",
     "@instructure/ui-stylelint-config": "^8.2.1",
+    "@instructure/ui-themeable": "^7.5.1",
     "@instructure/ui-webpack-config": "^8.2.1",
     "@rollup/plugin-commonjs": "^18.0.0",
     "@rollup/plugin-node-resolve": "^11.2.1",
@@ -41,7 +35,10 @@
     "@storybook/addon-links": "^6.2.9",
     "@storybook/react": "^6.2.9",
     "babel-loader": "^8.2.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
     "html-webpack-plugin": "^4",
+    "jest": "^26.6.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "rollup": "^2.45.2",
@@ -52,6 +49,17 @@
   },
   "peerDependencies": {
     "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.9.0",
+    "@instructure/canvas-theme": "^8.2.1",
+    "@instructure/emotion": "^8.2.1",
+    "@instructure/ui-heading": "^8.2.1",
+    "@instructure/ui-icons": "^8.2.1",
+    "@instructure/ui-modal": "^8.2.1",
+    "@instructure/ui-svg-images": "^8.2.1",
+    "@instructure/ui-text": "^8.2.1",
+    "@instructure/ui-themeable": "^7.5.1",
+    "@instructure/ui-themes": "^8.2.1",
+    "@instructure/ui-spinner": "^8.2.1",
+    "@instructure/ui-view": "^8.2.1"
   }
 }

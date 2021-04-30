@@ -18,7 +18,8 @@ export class LtiLimitModal extends React.Component {
       ...this.props,
       // Not sure this is the best way to do this.
       onOpen: () => this.context.set(true),
-      onClose: () => this.context.set(false)
+      onClose: () => this.context.set(false),
+      label: 'Testing'
     }
 
     return <Modal {...props}>
