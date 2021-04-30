@@ -16,6 +16,9 @@ Runs library unit tests
 
 Builds a new update of the library.
 
+### `npm publish`
+
+To publish the library to NPM so that it would be available for usage
 
 
 ### importing LtiApplyTheme
