@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ApplyTheme } from '@instructure/ui-themeable'
 import { EmotionThemeProvider } from '@instructure/emotion'
+import { NEW_THEME, OLD_THEME } from '../../utils/constants'
 
 /**
  * This attempts to load the theme from the supplied URL and then applies the theme to all the children.
@@ -32,7 +33,7 @@ export class LtiApplyTheme extends React.Component {
           .then((response) => {
             // Apply the loaded theme.
             let newTheme
-            if(version === 'new') {
+            if(version === NEW_THEME) {
               newTheme = this.props.highContrast ? canvasHighContrast : { ...canvas, ...json }
             } else {
               newTheme = ApplyTheme.generateTheme('canvas', response)
@@ -50,7 +51,7 @@ export class LtiApplyTheme extends React.Component {
     const {version, children} = this.props;
     const {theme} = this.state;
 
-    if (version === 'New') {
+    if (version === NEW_THEME) {
       return  <EmotionThemeProvider theme={theme}>
           {children}
       </EmotionThemeProvider>
@@ -65,14 +66,17 @@ export class LtiApplyTheme extends React.Component {
 }
 
 LtiApplyTheme.propTypes = {
+    /**
+   * The URL to load the theme variables from.
+   */
   url: PropTypes.string,
   children: PropTypes.node.isRequired,
-  version: PropTypes.oneOf(['New', 'Old'])
+  version: PropTypes.oneOf([NEW_THEME, OLD_THEME])
 }
 
 LtiApplyTheme.defaultProps = {
   url: null,
-  version: 'New'
+  version: NEW_THEME
 }
 
 

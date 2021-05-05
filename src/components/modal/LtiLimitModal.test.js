@@ -7,7 +7,7 @@ import { shallow, configure } from 'enzyme';
 configure({adapter: new Adapter()});
 
 const setup = () => {
-    return shallow(<LtiLimitModal children={ModalBody} />);
+    return shallow(<LtiLimitModal children={ModalBody} label={'MockLabel'} />);
 }
 
 describe('LtiLimitModal Test Suite', () => {
