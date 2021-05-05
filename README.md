@@ -8,6 +8,18 @@ In the project directory, you can run:
 
 Runs storybook to show a demo of the components in the library
 
+### `npm run test`
+
+Runs library unit tests
+
 ### `npm build-lib`
 
 Builds a new update of the library.
+
+### `npm publish`
+
+To publish the library to NPM so that it would be available for usage
+
+
+### importing LtiApplyTheme
+when impoting LtiApplyTheme, the default theme is the new theme, so any import that requires the older version would have to have to pass in a version props of 'Old'
