@@ -2,7 +2,7 @@
   "name": "ui-lti",
   "version": "1.0.1",
   "author": "University of Oxford, IT Services",
-  "description": "common ui components used accross our canvas platforms",
+  "description": "Common ui components used accross our canvas platforms",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "scripts": {
