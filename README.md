@@ -20,6 +20,10 @@ In the project directory, you can run:
 
 Runs storybook to show a demo of the components in the library
 
+### `npm run storybook-https`
+
+If you want to run storybook over https this looks for a certificate in `localhost.pem` and a key in `localhost-key.pem`. These are the files used by [mkcert](https://github.com/FiloSottile/mkcert) by default when running `mkcert localhost`.
+
 ### `npm run test`
 
 Runs library unit tests

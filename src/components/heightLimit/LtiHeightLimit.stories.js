@@ -1,15 +1,14 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { ApplyTheme } from '@instructure/ui-themeable'
+import React from 'react';
+import LtiHeightLimit from './LtiHeightLimit';
 
-import { storiesOf } from '@storybook/react';
+const Template = () => <LtiHeightLimit>
+      <div> Test Height Limit </div>
+    </LtiHeightLimit>
 
-import LtiHeightLimit from './LtiHeightLimit'
+export const Default = Template.bind({})
+Default.args = {}
 
-const stories = storiesOf('Components', module);
-
-stories.add('LtiHeightLimit', () => {
-    return (<LtiHeightLimit>
-          <div> Test Height Limit  </div>
-       </LtiHeightLimit>);
-})
+export default {
+    title: "LtiHeightLimit",
+    component: LtiHeightLimit
+}

@@ -1,13 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { ApplyTheme } from '@instructure/ui-themeable'
-import { ModalBody } from '@instructure/ui-modal'
-import { storiesOf } from '@storybook/react';
+import React from 'react';
+import LtiLimitModal from './LtiLimitModal';
 
-import LtiLimitModal from './LtiLimitModal'
+const Template = (args) => <LtiLimitModal {...args}/>
 
-const stories = storiesOf('Components', module);
+export const NoLimit = Template.bind({})
+NoLimit.args = {}
 
-stories.add('LtiLimitModal', () => {
-    return (<LtiLimitModal children={ModalBody} label={'MockLabel'} />);
-})
+export default {
+  title: "LtiLimitModal",
+  component: LtiLimitModal
+}

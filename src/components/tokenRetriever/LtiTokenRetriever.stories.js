@@ -1,15 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { ApplyTheme } from '@instructure/ui-themeable'
+import React from 'react';
 
-import { storiesOf } from '@storybook/react';
+import LtiTokenRetriever from './LtiTokenRetriever';
 
-import LtiTokenRetriever from './LtiTokenRetriever'
+const Template = () => <LtiTokenRetriever>
+      <div> Test Token Retriever </div>
+    </LtiTokenRetriever>
 
-const stories = storiesOf('Components', module);
+export const NoToken = Template.bind({})
 
-stories.add('LtiTokenRetriever', () => {
-    return (<LtiTokenRetriever> 
-           <div> Test Token Retriever </div>
-        </LtiTokenRetriever>);
-})
+export default {
+  title: 'LtiTokenRetriever',
+};
