@@ -12,7 +12,9 @@
     "test": "jest --config ./jest.config.json"
   },
   "dependencies": {
-    "@instructure/ui-billboard": "^8.2.1"
+    "@instructure/ui-billboard": "^8.2.1",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",
