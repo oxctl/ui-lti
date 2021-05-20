@@ -20,7 +20,8 @@ Builds a new update of the library.
 
 To publish the library to NPM so that it would be available for usage
 
-Connecting and debugging at runtime with a repo
+### `npm link`
+ For connecting and debugging at runtime with another repo
  - in @xctl/ui-lti
     - npm link
 
@@ -28,6 +29,7 @@ Connecting and debugging at runtime with a repo
     - npm link @oxctl/ui-lti
     - npm link ../ui-lti/node_module/react
     - npm link ../ui-lti/node_module/react-dom
+    - npm link ../ui-lti/node_module/react-redux
 
 
 ### importing LtiApplyTheme

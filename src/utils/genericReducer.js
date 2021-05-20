@@ -1,6 +1,7 @@
 export const ACTION_RESET_SUFFIX = ':clear';
 export const ACTION_UPDATE_SUFFIX = ':update';
 
+// generic reducer for using the spinner loader while waiting for data from the reducer
 const identityFunction = data => data;
 export function createLoadingReducer(loadingAction, loadedAction, initialLoadingState = false, loadedCallback = identityFunction) {
     const initialState = {
@@ -35,6 +36,7 @@ export function createLoadingReducer(loadingAction, loadedAction, initialLoading
     };
 }
 
+// generic reducer for persform instant actions, e.g. click and reset of a button
 export function createActionReducer(myAction) {
     const myActionUpdate = myAction + ACTION_UPDATE_SUFFIX;
     const myActionReset = myAction + ACTION_RESET_SUFFIX;
@@ -58,6 +60,21 @@ export function createActionReducer(myAction) {
             }
             case myActionReset: {
                 return initialState;
+            }
+            default: {
+                return state;
+            }
+        }
+    }
+}
+
+// generic reducer for just setting the state once at a time e.g setting a boolean value
+export function createFlagReducer(myAction) {
+
+    return function reducer(state = false, action) {
+        switch (action.type) {
+            case myAction: {
+                return action.status;
             }
             default: {
                 return state;

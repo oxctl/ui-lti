@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
 import { Billboard } from '@instructure/ui-billboard'
 import { IconWarningLine } from '@instructure/ui-icons'
-import { userNeedsLogin } from '../../actions/user'
+import { userAccessAction } from '../../actions/userAccess'
 import { connect } from 'react-redux'
-import { Provider } from "react-redux";
-import store from "../../store";
+
+const { promptUserLogin } = userAccessAction;
 
 /**
  * This either displays the child components or it displays a message asking the user to login.
@@ -15,8 +15,8 @@ export class LaunchOAuth extends React.Component {
   static propTypes = {
     accessToken: PropTypes.string,
     children: PropTypes.node.isRequired,
-    handleLoginDone: PropTypes.func.isRequired,
-    needsLogin: PropTypes.bool.isRequired,
+    promptUserLogin: PropTypes.func.isRequired,
+    promptLogin: PropTypes.bool.isRequired,
     server: PropTypes.object.isRequired
   }
 
@@ -30,12 +30,11 @@ export class LaunchOAuth extends React.Component {
   }
 
   componentDidMount() {
-    // window.addEventListener("message", (event) => {
-    //   if (event.data === 'token') {
-      console.log('in mount')
-        this.props.handleLoginDone()
-    //   }
-    // }, false)
+    window.addEventListener("message", (event) => {
+      if (event.data === 'token') {
+        this.props.promptUserLogin()
+      }
+    }, false)
   }
 
   handleLogin = () => {
@@ -43,15 +42,8 @@ export class LaunchOAuth extends React.Component {
   }
 
   render() {
-      console.log('ksks ', this.props.needsLogin)
-    return (this.props.needsLogin?this.renderLogin():this.renderChildren())
-  }
 
-  renderChildren() {
-    return this.props.children
-  }
-
-  renderLogin() {
+  if(this.props.promptUserLogin) {
 
     const {server, accessToken} = this.props
 
@@ -60,7 +52,7 @@ export class LaunchOAuth extends React.Component {
         proxyServer = server.proxyServer+ "/tokens/check"
     }
 
-    return <React.Fragment>
+    return <Fragment>
       <Billboard
         heading="Please Grant Access"
         message="Please click this message to grant permission for this tool to access your account."
@@ -71,26 +63,18 @@ export class LaunchOAuth extends React.Component {
       <form ref={this.formRef} method="post" action={proxyServer} target="_blank">
         <input type="hidden" name="access_token" value={accessToken ? accessToken : ""}/>
       </form>
-    </React.Fragment>   
+    </Fragment>   
+  }
+    return this.props.children
   }
 }
 
 const mapStateToProps = state => {
-    console.log('in map to prp', state)
+  const {userAccess: {promptLogin, server}} = state;
   return {
-    needsLogin: state.user.needsLogin,
-    server: state.server
+    promptLogin,
+    server
   }
 }
 
-const mapDispatchToProps = dispatch => {
-    console.log('in map to disparc')
-
-  return {
-    handleLoginDone: () => dispatch(userNeedsLogin(true))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LaunchOAuth)
-// const WrappedLaunch0Auth = connect(mapStateToProps, mapDispatchToProps)(LaunchOAuth)
-// export default WrappedLaunch0Auth;
+export default connect(mapStateToProps, {promptUserLogin})(LaunchOAuth)
