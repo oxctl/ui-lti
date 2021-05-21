@@ -43,29 +43,31 @@ export class LaunchOAuth extends React.Component {
 
   render() {
 
-  if(this.props.promptUserLogin) {
 
-    const {server, accessToken} = this.props
+    const {server, accessToken, promptLogin, children} = this.props
+    if(promptLogin) {
 
-    let proxyServer = ""
-    if(server) {
-        proxyServer = server.proxyServer+ "/tokens/check"
+      let proxyServer = ""
+      if(server) {
+          proxyServer = server.proxyServer+ "/tokens/check"
+      }
+
+      return <Fragment>
+        <Billboard
+          heading="Please Grant Access"
+          message="Please click this message to grant permission for this tool to access your account."
+          hero={(size) => <IconWarningLine size={size}/>}
+          size="large"
+          onClick={() => this.handleLogin()}
+        />
+        <form ref={this.formRef} method="post" action={proxyServer} target="_blank">
+          <input type="hidden" name="access_token" value={accessToken ? accessToken : ""}/>
+        </form>
+      </Fragment> 
     }
 
-    return <Fragment>
-      <Billboard
-        heading="Please Grant Access"
-        message="Please click this message to grant permission for this tool to access your account."
-        hero={(size) => <IconWarningLine size={size}/>}
-        size="large"
-        onClick={() => this.handleLogin()}
-      />
-      <form ref={this.formRef} method="post" action={proxyServer} target="_blank">
-        <input type="hidden" name="access_token" value={accessToken ? accessToken : ""}/>
-      </form>
-    </Fragment>   
-  }
-    return this.props.children
+    // returns the children element passed in as a props by default
+    return children
   }
 }
 

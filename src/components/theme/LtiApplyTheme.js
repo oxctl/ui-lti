@@ -48,8 +48,6 @@ export class LtiApplyTheme extends React.Component {
 
   render() {
 
-    console.log('linked successfully')
-
     const {version, children} = this.props;
     const {theme} = this.state;
 
