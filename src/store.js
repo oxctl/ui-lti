@@ -1,6 +1,6 @@
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
 import _flattenDeep from 'lodash/flattenDeep'
-import {userReducer as user, userMiddleware} from './reducers/user'
+import {userReducer as user, userMiddleware} from './reducers/userAccess'
 
 const reducer = combineReducers({
     user,

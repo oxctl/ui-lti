@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Billboard } from '@instructure/ui-billboard'
 import { IconWarningLine } from '@instructure/ui-icons'
 import { userAccessAction } from '../../actions/userAccess'
-import { connect } from 'react-redux'
 
 const { promptUserLogin } = userAccessAction;
 
@@ -71,12 +70,4 @@ export class LaunchOAuth extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  const {userAccess: {promptLogin, server}} = state;
-  return {
-    promptLogin,
-    server
-  }
-}
-
-export default connect(mapStateToProps, {promptUserLogin})(LaunchOAuth)
+export default LaunchOAuth

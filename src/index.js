@@ -18,3 +18,6 @@ export * from './actions/userAccess'
 export {
     LaunchOAuth
 }
+
+// utils
+export * from './utils/genericReducer'

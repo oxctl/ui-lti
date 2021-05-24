@@ -74,7 +74,7 @@ export function createFlagReducer(myAction) {
     return function reducer(state = false, action) {
         switch (action.type) {
             case myAction: {
-                return action.status;
+                return action.result;
             }
             default: {
                 return state;

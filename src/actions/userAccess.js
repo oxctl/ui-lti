@@ -6,13 +6,13 @@ export const userAccessAction = {
     promptUserLogin : (value = true) => {
         return{
             type: PROMPT_LOGIN,
-            status: value 
+            result: value 
         }
     },
     setServer : (value = null) => {
         return{
             type: SET_SERVER,
-            status: value 
+            result: value 
         }
     }
 }

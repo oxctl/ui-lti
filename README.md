@@ -29,7 +29,6 @@ To publish the library to NPM so that it would be available for usage
     - npm link @oxctl/ui-lti
     - npm link ../ui-lti/node_module/react
     - npm link ../ui-lti/node_module/react-dom
-    - npm link ../ui-lti/node_module/react-redux
 
 
 ### importing LtiApplyTheme

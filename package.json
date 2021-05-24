@@ -11,10 +11,6 @@
     "build-lib": "rollup -c",
     "test": "jest --config ./jest.config.json"
   },
-  "dependencies": {
-    "react-redux": "^7.2.4",
-    "redux": "^4.1.0"
-  },
   "devDependencies": {
     "@babel/core": "^7.13.16",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
@@ -44,7 +40,6 @@
     "jest": "^26.6.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "redux-mock-store": "^1.5.4",
     "rollup": "^2.45.2",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-json": "^4.0.0",
