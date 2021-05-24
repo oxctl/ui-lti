@@ -22,7 +22,7 @@ To publish the library to NPM so that it would be available for usage
 
 ### `npm link`
  For connecting and debugging at runtime with another repo
- - in @xctl/ui-lti
+ - in @oxctl/ui-lti
     - npm link
 
 - in parent repo
