@@ -21,3 +21,4 @@ export {
 
 // utils
 export * from './utils/genericReducer'
+export * from './utils/genericMiddleware'
