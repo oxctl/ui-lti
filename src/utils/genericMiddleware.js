@@ -1,4 +1,4 @@
-import {loadJSON} from "./loadJSON";=
+import {loadJSON} from "./loadJSON";
 
 export const ACTION_UPDATE_SUFFIX = ':update';
 

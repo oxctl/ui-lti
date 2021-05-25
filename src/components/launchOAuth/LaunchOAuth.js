@@ -2,9 +2,6 @@ import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
 import { Billboard } from '@instructure/ui-billboard'
 import { IconWarningLine } from '@instructure/ui-icons'
-import { userAccessAction } from '../../actions/userAccess'
-
-const { promptUserLogin } = userAccessAction;
 
 /**
  * This either displays the child components or it displays a message asking the user to login.
