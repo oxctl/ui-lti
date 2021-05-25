@@ -87,7 +87,7 @@ export class LtiTokenRetriever extends React.Component {
     // localStorage can be blocked (eg when cookies are blocked)
     try {
       if (jwt) {
-        localStorage.setItem("jwt", jwt)
+        localStorage.setItem("jwt", JSON.stringify(jwt))
       }
     } catch (e) {
       if (!(e instanceof DOMException)) {
@@ -99,7 +99,7 @@ export class LtiTokenRetriever extends React.Component {
   loadJwt = () => {
     // localStorage can be blocked (eg when cookies are blocked)
     try {
-      return localStorage.getItem('jwt')
+      return JSON.parse(localStorage.getItem('jwt'))
     } catch (e) {
       if (!(e instanceof DOMException)) {
         throw e
