@@ -20,6 +20,16 @@ Builds a new update of the library.
 
 To publish the library to NPM so that it would be available for usage
 
+### `npm link`
+ For connecting and debugging at runtime with another repo
+ - in @oxctl/ui-lti
+    - npm link
+
+- in parent repo
+    - npm link @oxctl/ui-lti
+    - npm link ../ui-lti/node_module/react
+    - npm link ../ui-lti/node_module/react-dom
+
 
 ### importing LtiApplyTheme
 when impoting LtiApplyTheme, the default theme is the new theme, so any import that requires the older version would have to have to pass in a version props of 'Old'

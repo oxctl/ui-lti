@@ -9,7 +9,7 @@ import LtiApplyTheme from './LtiApplyTheme'
 const stories = storiesOf('Components', module);
 
 stories.add('LtiApplyTheme', () => {
-    return (<LtiApplyTheme> 
+    return (<LtiApplyTheme version={'Old'}> 
            <div> Test Apply Theme </div>
         </LtiApplyTheme>);
 })
