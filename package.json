@@ -23,7 +23,6 @@
     "@instructure/ui-billboard": "^8.2.1",
     "@instructure/ui-eslint-config": "^8.2.1",
     "@instructure/ui-modal": "^8.2.1",
-    "@instructure/ui-scripts": "^8.2.1",
     "@instructure/ui-spinner": "^8.2.1",
     "@instructure/ui-stylelint-config": "^8.2.1",
     "@instructure/ui-themeable": "^7.5.1",
