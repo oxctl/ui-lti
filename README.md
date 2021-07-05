@@ -1,4 +1,12 @@
-This project was created as a central repository for common UI components used in our other projects
+This project was created as a central repository for common UI components that help when building LTI tools that plugin to the [Canvas LMS](https://www.instructure.com/en-gb/canvas) and build upon the [Instructure UI](https://instructure.design/) component library.
+
+## Using this library
+
+This library is published to npmjs: https://www.npmjs.com/package/@oxctl/ui-lti
+If you want to add this library to your React tool you can add it with:
+
+    npm install --save @oxctl/ui-lti
+
 
 ## Available Scripts
 
