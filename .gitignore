@@ -8,3 +8,6 @@ yarn-error.log
 .npmrc
 .tmp/
 src/stories
+
+# We should alway build from source, rather than checkin the build files.
+dist/
