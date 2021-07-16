@@ -2,10 +2,11 @@
   "name": "@oxctl/ui-lti",
   "version": "1.2.2",
   "author": "University of Oxford, IT Services",
-  "description": "Common ui components used accross our canvas platforms",
+  "description": "Common UI components that are commonly used for LTI tools in the Canvas LMS",
   "main": "dist/index.js",
-  "module": "dist/index.es.js",
+  "module": "dist/index.js",
   "license": "MIT",
+  "sideEffects": false,
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
@@ -47,8 +48,7 @@
     "rollup": "^2.45.2",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-terser": "^7.0.2"
+    "rollup-plugin-peer-deps-external": "^2.2.4"
   },
   "peerDependencies": {
     "@instructure/canvas-theme": ">= 7.0.0",
