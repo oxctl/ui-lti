@@ -9,7 +9,7 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "build-lib": "rollup -c",
+    "build-lib": "rollup -cm",
     "test": "jest --config ./jest.config.json"
   },
   "devDependencies": {
@@ -23,7 +23,6 @@
     "@instructure/ui-billboard": "^8.2.1",
     "@instructure/ui-eslint-config": "^8.2.1",
     "@instructure/ui-modal": "^8.2.1",
-    "@instructure/ui-scripts": "^8.2.1",
     "@instructure/ui-spinner": "^8.2.1",
     "@instructure/ui-stylelint-config": "^8.2.1",
     "@instructure/ui-themeable": "^7.5.1",
@@ -39,6 +38,7 @@
     "enzyme-adapter-react-16": "^1.15.6",
     "html-webpack-plugin": "^4",
     "jest": "^26.6.3",
+    "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "rollup": "^2.45.2",
@@ -48,17 +48,20 @@
     "rollup-plugin-terser": "^7.0.2"
   },
   "peerDependencies": {
-    "react": ">= 16.9.0",
-    "react-dom": ">= 16.9.0",
     "@instructure/canvas-theme": ">= 7.0.0",
+    "@instructure/emotion": ">= 7.0.0",
+    "@instructure/ui-billboard": ">= 7.0.0",
     "@instructure/ui-heading": ">= 7.0.0",
     "@instructure/ui-icons": ">= 7.0.0",
     "@instructure/ui-modal": ">= 7.0.0",
-    "@instructure/ui-billboard": ">= 7.0.0",
+    "@instructure/ui-spinner": ">= 7.0.0",
     "@instructure/ui-svg-images": ">= 7.0.0",
     "@instructure/ui-text": ">= 7.0.0",
+    "@instructure/ui-themeable": ">= 7.0.0",
     "@instructure/ui-themes": ">= 7.0.0",
-    "@instructure/ui-spinner": ">= 7.0.0",
-    "@instructure/ui-view": ">= 7.0.0"
+    "@instructure/ui-view": ">= 7.0.0",
+    "prop-types": ">=15.0.0",
+    "react": ">= 16.9.0",
+    "react-dom": ">= 16.9.0"
   }
 }

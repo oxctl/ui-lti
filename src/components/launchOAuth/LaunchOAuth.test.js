@@ -9,7 +9,7 @@ configure({adapter: new Adapter()});
 const mockChildElement = 'Mock Child Element'
 
 const setup = (props) => {
-    return mount(<LaunchOAuth server={{}} children={mockChildElement} {...props}/>);
+    return mount(<LaunchOAuth server={{}} children={mockChildElement} promptUserLogin={()=>{}} {...props}/>);
 }
 
 describe('LaunchOAuth Test Suite', () => {
