@@ -46,3 +46,19 @@ For connecting and debugging at runtime with another repo, this means you don't 
     npm link ../ui-lti/node_module/react
     npm link ../ui-lti/node_module/react-dom
     ```
+
+### Releasing
+
+This library is published to npmjs and to make a new release do:
+
+    npm version minor
+
+This increments the version in `package.json` and creates a git tag. After that's complete perform a build:
+
+    npm run build-lib
+
+And then if it completes ok push the tags and then publish the package:
+
+    git push
+    git push --tags
+    npm publish
