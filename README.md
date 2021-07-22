@@ -33,11 +33,16 @@ Builds a new update of the library.
 To publish the library to NPM so that it would be available for usage
 
 ### `npm link`
- For connecting and debugging at runtime with another repo
- - in @oxctl/ui-lti
-    - npm link
+For connecting and debugging at runtime with another repo, this means you don't have to publish changes to npm to use them:
 
-- in parent repo
-    - npm link @oxctl/ui-lti
-    - npm link ../ui-lti/node_module/react
-    - npm link ../ui-lti/node_module/react-dom
+ - in @oxctl/ui-lti
+   ```
+   npm link
+   ```
+
+ - in repo using/testing this library
+    ```
+    npm link @oxctl/ui-lti
+    npm link ../ui-lti/node_module/react
+    npm link ../ui-lti/node_module/react-dom
+    ```
