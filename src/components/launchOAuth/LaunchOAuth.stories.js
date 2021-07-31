@@ -1,7 +1,5 @@
 import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
 import { storiesOf } from '@storybook/react';
-import { ApplyTheme } from '@instructure/ui-themeable'
 import LaunchOAuth from './LaunchOAuth'
 
 const stories = storiesOf('Components', module);

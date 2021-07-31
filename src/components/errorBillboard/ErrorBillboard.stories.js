@@ -1,15 +1,37 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { ApplyTheme } from '@instructure/ui-themeable'
+import React from 'react';
 
-import { storiesOf } from '@storybook/react';
+import ErrorBillboard from './ErrorBillboard';
 
-import ErrorBillboard from './ErrorBillboard'
+const Template = (args) => <ErrorBillboard {...args}/>
 
-const stories = storiesOf('Components', module);
+export const NoError = Template.bind({})
+NoError.args = {
+    heading: null,
+    message: null
+}
 
-stories.add('ErrorBillboard', () => {
-    return (<ErrorBillboard heading="Test Error Heading" message="Test Message">
-          <div> Test Error Billboard  </div>
-       </ErrorBillboard>);
-})
+export const HeadingOnly = Template.bind({})
+HeadingOnly.args = {
+    heading: "Test Heading",
+}
+
+export const MessageOnly = Template.bind({})
+MessageOnly.args = {
+    message: "Test Message"
+}
+
+
+export const MessageAndHeading = Template.bind({})
+MessageAndHeading.args = {
+    heading: "Test Heading",
+    message: "Test Message"
+}
+
+export default {
+    title: "ErrorBillboard",
+    component: ErrorBillboard,
+    args: {
+        children: <div>Normal content that should be displayed</div>
+    },
+}
+
