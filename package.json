@@ -11,7 +11,7 @@
     "storybook": "start-storybook -p 6006",
     "storybook-https": "start-storybook -p 6006 --https --ssl-cert localhost.pem --ssl-key localhost-key.pem",
     "build-storybook": "build-storybook",
-    "build-lib": "rollup -cm",
+    "build": "rollup -cm",
     "test": "jest --config ./jest.config.json"
   },
   "files": [

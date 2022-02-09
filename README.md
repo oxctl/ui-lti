@@ -28,7 +28,7 @@ If you want to run storybook over https this looks for a certificate in `localho
 
 Runs library unit tests
 
-### `npm run build-lib`
+### `npm run build`
 
 Builds a new update of the library.
 
