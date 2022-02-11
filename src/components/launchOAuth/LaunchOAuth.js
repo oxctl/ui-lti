@@ -9,10 +9,25 @@ import { IconWarningLine } from '@instructure/ui-icons'
 export class LaunchOAuth extends React.Component {
 
   static propTypes = {
+    /**
+     * The token used for requests against the proxy.
+     */
     accessToken: PropTypes.string,
+    /**
+     * The components that should be hidden when prompting to grant access.
+     */
     children: PropTypes.node.isRequired,
+    /**
+     * Function called after user has granted the application access to their account.
+     */
     promptUserLogin: PropTypes.func.isRequired,
+    /**
+     * Should we prompt the user to grant access.
+     */
     promptLogin: PropTypes.bool.isRequired,
+    /**
+     * The proxy server address.
+     */
     server: PropTypes.object.isRequired
   }
 
