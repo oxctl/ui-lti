@@ -32,11 +32,22 @@ Runs library unit tests
 
 Builds a new update of the library.
 
+### `npm run start`
+
+
+
 ### `npm publish`
 
 To publish the library to NPM so that it would be available for usage
 
 ### `npm link`
+
+Before doing this you need to remove any peerDependencies that are in the `node_modules` folder as otherwise you can end up with duplicates in the build and react in particular has problems with this. A quick way to do this is to run:
+
+     npm run remove-peers
+
+This will remove all peerDependencies. When you wish to use storybook again you will need to re-install all the missing dependencies with `npm ci`.
+
 For connecting and debugging at runtime with another repo, this means you don't have to publish changes to npm to use them:
 
  - in @oxctl/ui-lti
@@ -47,8 +58,6 @@ For connecting and debugging at runtime with another repo, this means you don't 
  - in repo using/testing this library
     ```
     npm link @oxctl/ui-lti
-    npm link ../ui-lti/node_module/react
-    npm link ../ui-lti/node_module/react-dom
     ```
 
 ### Releasing
@@ -59,7 +68,7 @@ This library is published to npmjs and to make a new release do:
 
 This increments the version in `package.json` and creates a git tag. After that's complete perform a build:
 
-    npm run build-lib
+    npm run build
 
 And then if it completes ok push the tags and then publish the package:
 

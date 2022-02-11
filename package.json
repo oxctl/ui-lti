@@ -12,7 +12,9 @@
     "storybook-https": "start-storybook -p 6006 --https --ssl-cert localhost.pem --ssl-key localhost-key.pem",
     "build-storybook": "build-storybook",
     "build": "rollup -cm",
-    "test": "jest --config ./jest.config.json"
+    "start": "rollup -cm -w",
+    "test": "jest --config ./jest.config.json",
+    "remove-peers": "npm view --json=true . peerDependencies | jq -r 'keys | .[] |  @text' | while read dep; do  rm -r ./node_modules/${dep} && echo Removed ${dep}; done"
   },
   "files": [
     "src/*",
@@ -66,5 +68,6 @@
     "prop-types": ">=15.0.0",
     "react": ">= 16.9.0",
     "react-dom": ">= 16.9.0"
-  }
+  },
+  "dependencies": {}
 }
