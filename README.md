@@ -42,6 +42,8 @@ To publish the library to NPM so that it would be available for usage
 
 ### `npm link`
 
+**This is currently broken**
+
 Before doing this you need to remove any peerDependencies that are in the `node_modules` folder as otherwise you can end up with duplicates in the build and react in particular has problems with this. A quick way to do this is to run:
 
      npm run remove-peers

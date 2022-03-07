@@ -7,11 +7,15 @@ export default [
         input: './src/index.js',
         output: [
             {
-                dir: 'dist',
+                dir: 'dist/es',
                 format: 'es',
                 exports: 'named',
                 // This is so that we can have tree shaking working.
                 preserveModules: true
+            },
+            {
+                dir: 'dist/cjs',
+                format: 'cjs',
             }
         ],
         plugins: [
