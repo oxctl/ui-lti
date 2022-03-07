@@ -78,7 +78,7 @@ export class LtiHeightLimit extends React.Component {
       // un-parseable message may not be meant for our handlers
       return
     }
-    if (message.subject === 'lti.fetchWindowSize') {
+    if (message.subject === 'lti.fetchWindowSize.response') {
       this.message = message
       const height = message.height - message.offset.top
       this.setState({height})
