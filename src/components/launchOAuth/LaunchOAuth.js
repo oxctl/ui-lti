@@ -71,7 +71,7 @@ export class LaunchOAuth extends React.Component {
           size="large"
           onClick={() => this.handleLogin()}
         />
-        <form ref={this.formRef} method="post" action={proxyServer} target="_blank">
+        <form ref={this.formRef} method="post" action={proxyServer} target="_blank" rel="opener">
           <input type="hidden" name="access_token" value={accessToken ? accessToken : ""}/>
         </form>
       </Fragment> 
