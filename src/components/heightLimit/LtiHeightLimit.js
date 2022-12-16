@@ -80,7 +80,12 @@ export class LtiHeightLimit extends React.Component {
     }
     if (message.subject === 'lti.fetchWindowSize.response') {
       this.message = message
-      const height = message.height - message.offset.top
+      let height = message.height
+      // When launched from a deep linking placement there doesn't appear to be a offset in the message
+      // returned
+      if (message.offset) {
+        height -= message.offset.top
+      }
       this.setState({height})
       // If we are limiting height we want to resize our height
       this.resize()
