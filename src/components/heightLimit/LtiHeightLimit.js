@@ -42,9 +42,12 @@ export class LtiHeightLimit extends React.Component {
   }
 
   resize = () => {
-    const height = this.state.limit?this.state.height:document.documentElement.scrollHeight
-    // Generally we want to use scrollHeight, but it doesn't shrink when the content gets smaller, when there's a
-    // moderate difference between them we use offsetHeight as that does shrink.
+    const height = this.state.limit ?
+        this.state.height :
+        // We can't use document.documentElement.scrollHeight as it's rounded to an int and this can result in a
+        // scroll bar showing when the height being rounded down. Canvas appears to allow a float (it works), but 
+        // we round up (ceil) so that we're complying with the API documentation in case they change in the future.
+        Math.ceil(document.documentElement.getBoundingClientRect().height)
     window.parent.postMessage(JSON.stringify({
       subject: 'lti.frameResize',
       height: height
