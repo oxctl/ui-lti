@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # This blocks all version updates so that we only get security updates.
+    open-pull-requests-limit: 0
+    allow:
+      - dependency-type: "production"
