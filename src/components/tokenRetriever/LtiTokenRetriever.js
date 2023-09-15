@@ -14,8 +14,8 @@ import ErrorBillBoard from "../errorBillboard/ErrorBillboard"
 export class LtiTokenRetriever extends React.Component {
 
   static propTypes = {
-    // The URL to the LTI server to get the token from.
-    ltiServer: PropTypes.string.isRequired,
+    // The URL to the LTI server to get the token from, if it's not supplied we look in the URL for a parameter.
+    ltiServer: PropTypes.string,
     // Callback that is passed the loaded JWT, only called on successful loading of the JWT
     handleJwt: PropTypes.func.isRequired,
     // The application node to render as long as we're all good.
@@ -35,10 +35,13 @@ export class LtiTokenRetriever extends React.Component {
     if (!this.state.loadingTried) {
       this.setState({loadingTried: true})
       const token = this.getToken()
-      if (token) {
-        this.fetchJwt(token)
-      } else {
+      const server = this.getServer()
+      if (!token) {
         this.setState({error: "No token found to load"})
+      } else if (!server) {
+        this.setState({error: "No server found to load from"})
+      } else {
+        this.fetchJwt(token, server)
       }
     }
   }
@@ -47,12 +50,20 @@ export class LtiTokenRetriever extends React.Component {
     const params = new URLSearchParams(window.location.search)
     return params.get('token')
   }
+  
+  getServer = () => {
+    if (this.props.ltiServer) {
+      return this.props.ltiServer
+    }
+    const params = new URLSearchParams(window.location.search)
+    return params.get('server')
+  }
 
-  fetchJwt = (token) => {
+  fetchJwt = (token, server) => {
     this.setState({loading: true})
     const formData = new FormData()
     formData.append('key', token)
-    fetch(`${this.props.ltiServer}/token`, {
+    fetch(`${server}/token`, {
         method: 'POST',
         body: formData
       }
