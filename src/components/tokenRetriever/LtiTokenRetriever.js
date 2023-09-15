@@ -48,7 +48,7 @@ export class LtiTokenRetriever extends React.Component {
 
   getToken = () => {
     const params = new URLSearchParams(window.location.search)
-    return params.get('token')
+    return decodeURIComponent(params.get('token'))
   }
   
   getServer = () => {
@@ -56,7 +56,7 @@ export class LtiTokenRetriever extends React.Component {
       return this.props.ltiServer
     }
     const params = new URLSearchParams(window.location.search)
-    return params.get('server')
+    return decodeURIComponent(params.get('server'))
   }
 
   fetchJwt = (token, server) => {
