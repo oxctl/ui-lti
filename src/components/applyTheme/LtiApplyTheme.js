@@ -21,8 +21,8 @@ export class LtiApplyTheme extends React.Component {
 
   static defaultProps = {
     url: null,
-    highContrast: true,
-    maxRetries: 0
+    highContrast: false,
+    maxRetries: 1
   }
 
   loading = false
@@ -31,35 +31,41 @@ export class LtiApplyTheme extends React.Component {
   }
 
   componentDidMount() {
-    this.loadTheme(0)
+    this.loadTheme()
   }
 
-  loadTheme = (retries) => {
+  /**
+   * This fetches the custom theme variables for the instance.
+   */
+  fetchVariables = async () => {
+    if (this.props.url) {
+      for (let attempt = 0; attempt <= this.props.maxRetries; attempt++) {
+        try {
+          const variables = await fetch(this.props.url)
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('Error loading theme (status: ' + response.status + ')')
+                }
+                return response
+              })
+              .then(response => response.json())
+          return variables
+        } catch (e) {
+          console.warn('Loading of theme ' + this.props.url + ' failed: ' + e)
+        }
+      }
+      console.warn('Giving up loading theme');
+    }
+    return {}
+  }
+  
+  loadTheme = async () => {
+    console.debug('Loading theme')
     if (!this.loading) {
       this.loading = true
       let newTheme
-      if (this.props.url) {
-        fetch(this.props.url)
-            .then(response => {
-              if (!response.ok) {
-                if (retries < this.props.maxRetries) {
-                  this.loadTheme(retries + 1)
-                } else {
-                  throw new Error('Error loading theme (status: ' + response.status + ')')
-                }
-              }
-              return response
-            })
-            .then(response => response.json())
-            .then((json) => {
-              // Apply the loaded theme.
-              newTheme = this.props.highContrast ? canvasHighContrast : { ...canvas, ...json }
-            }).catch(error => {
-          console.warn('Loading of theme ' + this.props.url + ' failed: ' + error)
-        })
-      } else {
-        newTheme = this.props.highContrast ? canvasHighContrast : canvas
-      }
+      const variables = await this.fetchVariables()
+      newTheme = this.props.highContrast ? canvasHighContrast : { ...canvas, ...variables }
       this.setState({theme: newTheme})
       this.loading = false
     }
@@ -69,7 +75,7 @@ export class LtiApplyTheme extends React.Component {
     if (this.props.url !== prevProps.url
         || this.props.highContrast !== prevProps.highContrast
     ) {
-      this.loadTheme(0)
+      this.loadTheme()
     }
   }
 

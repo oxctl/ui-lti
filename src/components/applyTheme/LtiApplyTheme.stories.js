@@ -11,10 +11,16 @@ export default {
     argTypes: {
         highContrast: {
             control: 'boolean'
+        },
+        url: {
+            control: 'text'
+        },
+        maxRetries: {
+            control: 'number'
         }
     },
-    render: ({ highContrast }) => (
-        <LtiApplyTheme highContrast={highContrast}>
+    render: ( props ) => (
+        <LtiApplyTheme {...props}>
             <div style={{display:'flex', background:'white'}}>
                 <View margin='small'>
                     <ColorIndicator color=''/>
@@ -22,8 +28,13 @@ export default {
                 <View margin='small'>
                     <Avatar name="Apply theme" size="xx-large" />
                 </View>
+                {/*The warning colour is different between normal and high contrast*/}
                 <View margin='small'>
-                    <Text color="warning" size="xx-large">LtiApplyTheme test</Text>
+                    <Text color="warning" size="xx-large">Warning Text</Text>
+                </View>
+                {/*The brand text is easy to re-colour in the theme variables*/}
+                <View margin='small'>
+                    <Text color="brand" size="xx-large">Brand Text</Text>
                 </View>
             </div>
         </LtiApplyTheme>
@@ -32,4 +43,22 @@ export default {
 
 export const NoArgs = {
     args: {}
+}
+
+export const HighContrast = {
+    args: {
+        highContrast: true
+    }
+}
+
+export const BadUrl = {
+    args: {
+        url: '/does/not/work'
+    }
+}
+
+export const LoadingTheme = {
+    args: {
+        url: '/theme-vars.json'
+    }
 }

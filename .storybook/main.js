@@ -21,4 +21,6 @@ module.exports = {
   features: {
     storyStoreV7: false,
   },
+
+  staticDirs: ['../public'],
 }
