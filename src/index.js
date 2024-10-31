@@ -1,9 +1,9 @@
 
 // components
-export * from './components/heightLimit/LtiHeightLimit';
-export * from './components/modal/LtiLimitModal';
-export * from './components/tokenRetriever/LtiTokenRetriever';
-export * from './components/errorBillboard/ErrorBillboard';
-export * from './components/launchOAuth/LaunchOAuth';
-export * from './components/applyTheme/LtiApplyTheme';
-export * from './components/promptOAuth/PromptOAuth';
+export * from './components/heightLimit/LtiHeightLimit.jsx';
+export * from './components/modal/LtiLimitModal.jsx';
+export * from './components/tokenRetriever/LtiTokenRetriever.jsx';
+export * from './components/errorBillboard/ErrorBillboard.jsx';
+export * from './components/launchOAuth/LaunchOAuth.jsx';
+export * from './components/applyTheme/LtiApplyTheme.jsx';
+export * from './components/promptOAuth/PromptOAuth.jsx';

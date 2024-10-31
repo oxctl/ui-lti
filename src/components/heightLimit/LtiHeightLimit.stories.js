@@ -1,5 +1,5 @@
 import React from 'react';
-import LtiHeightLimit from './LtiHeightLimit';
+import LtiHeightLimit from './LtiHeightLimit.jsx';
 
 const Template = () => <LtiHeightLimit>
       <div> Test Height Limit </div>

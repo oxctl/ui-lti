@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { storiesOf } from '@storybook/react';
-import LaunchOAuth from './LaunchOAuth'
+import LaunchOAuth from './LaunchOAuth.jsx'
 
 const stories = storiesOf('Components', module);
 

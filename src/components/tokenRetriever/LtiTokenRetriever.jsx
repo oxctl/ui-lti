@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import {Spinner} from '@instructure/ui-spinner'
-import ErrorBillBoard from "../errorBillboard/ErrorBillboard"
+import ErrorBillboard from "../errorBillboard/ErrorBillboard.jsx"
 
 /**
  * Looks for a one time token in the URL parameters and then attempts to use this to retrieve a JWT token
@@ -128,9 +128,9 @@ export class LtiTokenRetriever extends React.Component {
 
   render() {
     return (
-      <ErrorBillBoard message={this.state.error}>
+      <ErrorBillboard message={this.state.error}>
         {(this.state.loading || !this.state.loadingTried) ? this.renderLoading() : this.props.children}
-      </ErrorBillBoard>
+      </ErrorBillboard>
     )
   }
 

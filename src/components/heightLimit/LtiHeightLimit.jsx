@@ -16,6 +16,7 @@ const LtiHeightLimitContext = React.createContext({
 export class LtiHeightLimit extends React.Component {
 
   static propTypes = {
+    debug: PropTypes.bool,
     children: PropTypes.node.isRequired
   }
 
@@ -23,7 +24,9 @@ export class LtiHeightLimit extends React.Component {
     // The height to resize to when we are limit our height.
     height: 'auto',
     // Should we limit this component's height to that of the containing iframe?
-    limit: false
+    limit: false,
+    // By default we don't debug height limit changes
+    debug: false
   }
 
   componentDidMount() {
@@ -40,6 +43,12 @@ export class LtiHeightLimit extends React.Component {
     window.removeEventListener('message', this.messageListener)
     this.observer.disconnect()
   }
+  
+  logDebug = (message) => {
+    if (this.props.debug) {
+      console.debug(message)
+    }
+  }
 
   resize = () => {
     const height = this.state.limit ?
@@ -48,6 +57,7 @@ export class LtiHeightLimit extends React.Component {
         // scroll bar showing when the height being rounded down. Canvas appears to allow a float (it works), but 
         // we round up (ceil) so that we're complying with the API documentation in case they change in the future.
         Math.ceil(document.documentElement.getBoundingClientRect().height)
+    this.logDebug(`Resizing to ${height}`)
     window.parent.postMessage(JSON.stringify({
       subject: 'lti.frameResize',
       height: height
@@ -89,6 +99,7 @@ export class LtiHeightLimit extends React.Component {
       if (message.offset) {
         height -= message.offset.top
       }
+      this.logDebug(`Got height message with value of: ${height}`)
       this.setState({height})
       // If we are limiting height we want to resize our height
       this.resize()
