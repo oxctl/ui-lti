@@ -60,7 +60,6 @@ export class LtiApplyTheme extends React.Component {
   }
   
   loadTheme = async () => {
-    console.debug('Loading theme')
     if (!this.loading) {
       this.loading = true
       let newTheme

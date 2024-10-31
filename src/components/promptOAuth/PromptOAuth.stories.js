@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { storiesOf } from '@storybook/react';
-import PromptOAuth from "./PromptOAuth";
+import PromptOAuth from "./PromptOAuth.jsx";
 
 const stories = storiesOf('Components', module);
 

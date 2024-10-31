@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LtiTokenRetriever from './LtiTokenRetriever';
+import LtiTokenRetriever from './LtiTokenRetriever.jsx';
 
 const Template = () => <LtiTokenRetriever>
       <div> Test Token Retriever </div>

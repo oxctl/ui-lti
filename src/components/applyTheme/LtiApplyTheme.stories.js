@@ -1,5 +1,5 @@
 import React from 'react'
-import LtiApplyTheme from './LtiApplyTheme'
+import LtiApplyTheme from './LtiApplyTheme.jsx'
 import { ColorIndicator } from '@instructure/ui-color-picker'
 import { View } from '@instructure/ui-view'
 import { Avatar } from '@instructure/ui-avatar'
