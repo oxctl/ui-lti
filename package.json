@@ -1,6 +1,6 @@
 {
   "name": "@oxctl/ui-lti",
-  "version": "1.6.0",
+  "version": "2.0.0",
   "author": "University of Oxford, IT Services",
   "description": "Common UI components that are commonly used for LTI tools in the Canvas LMS",
   "module": "dist/ui-lti.js",
