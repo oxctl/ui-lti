@@ -14,7 +14,7 @@ export default defineConfig({
     build: {
         lib: {
             entry: 'src/index.js',
-            formats: ['es']
+            formats: ['es', 'cjs']
         },
         rollupOptions: {
             external: [...peerDependencies, 'react/jsx-runtime'],

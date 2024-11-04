@@ -4,6 +4,11 @@
   "author": "University of Oxford, IT Services",
   "description": "Common UI components that are commonly used for LTI tools in the Canvas LMS",
   "module": "dist/ui-lti.js",
+  "main": "dist/ui-lti.cjs",
+  "exports": {
+    "import": "./dist/ui-lti.js",
+    "require": "./dist/ui-ltu.cjs"
+  },
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
