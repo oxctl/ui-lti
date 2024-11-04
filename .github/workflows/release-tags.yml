@@ -1,0 +1,30 @@
+# Any tag automatically gets made into a release and it gets published to npmjs.
+name: Release Tags
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  publish-npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://registry.npmjs.org/
+          always-auth: true
+      - run: npm ci
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+  release:
+    needs: publish-npm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Release
+        uses: softprops/action-gh-release@975c1b265e11dd76618af1c374e7981f9a6ff44a
