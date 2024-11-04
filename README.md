@@ -68,12 +68,7 @@ This library is published to npmjs and to make a new release do:
 
     npm version minor
 
-This increments the version in `package.json` and creates a git tag. After that's complete perform a build:
-
-    npm run build
-
-And then if it completes ok push the tags and then publish the package:
+And then if it completes ok push the tags and GitHub actions will build and publish the package to npmjs.
 
     git push
     git push --tags
-    npm publish
