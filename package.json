@@ -7,7 +7,7 @@
   "main": "dist/ui-lti.cjs",
   "exports": {
     "import": "./dist/ui-lti.js",
-    "require": "./dist/ui-ltu.cjs"
+    "require": "./dist/ui-lti.cjs"
   },
   "license": "MIT",
   "type": "module",
