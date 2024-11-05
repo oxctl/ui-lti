@@ -78,8 +78,7 @@ export class PromptOAuth extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
                         <View as='div'>
-                            Please grant permission to load this content. This is a one-time (two-step) authorisation.
-                            After clicking you will need to complete one more screen to finish the process.
+                            Please grant permission to enable this University of Oxford tool. This is a one-time authorisation. After clicking you will need to complete one more screen to finish the process.
                         </View>
                     </Modal.Body>
                     <Modal.Footer>
