@@ -16,7 +16,8 @@ export class LtiTokenRetriever extends React.Component {
   static propTypes = {
     // The URL to the LTI server to get the token from, if it's not supplied we look in the URL for a parameter.
     ltiServer: PropTypes.string,
-    // Callback that is passed the loaded JWT, only called on successful loading of the JWT
+    // Callback that is passed the loaded JWT and the server. Only called on successful loading of the JWT.
+    // The server is useful if further requests need to be made (eg for NRPS calls or deep linking).
     handleJwt: PropTypes.func.isRequired,
     // The application node to render as long as we're all good.
     children: PropTypes.node.isRequired
@@ -93,7 +94,9 @@ export class LtiTokenRetriever extends React.Component {
       // We have changed the responses from the service so that can just include the jwt and not the values
       // decoded. The newer version is json.jwt
       const jwt = json.jwt ? json.jwt : json.token_value
-      this.props.handleJwt(jwt)
+      // We pass back the server as well do that we don't have to have the calling code also extract the server from 
+      // the URL
+      this.props.handleJwt(jwt, server)
       this.saveJwt(jwt)
     }).catch(reason => {
       this.setState({error: reason.toString()})
