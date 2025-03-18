@@ -6,9 +6,13 @@ on:
     tags:
       - "v*.*.*"
 
+
+
 jobs:
   publish-npm:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -22,6 +26,9 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
   release:
+    permissions:
+      contents: read
+      releases: write
     needs: publish-npm
     runs-on: ubuntu-latest
     steps:
