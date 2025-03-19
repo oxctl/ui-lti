@@ -144,11 +144,10 @@ LtiTokenRetriever.propTypes = {
    * The application node to render as long as we're all good.
    */
   children: PropTypes.node.isRequired,
-
   /**
-   * The window object to extract the URL parameters from. This is useful for testing.
+   * The location object to extract the URL parameters from. This is useful for testing.
    */
-  window: PropTypes.object
+  location: PropTypes.object
 };
 
 export default LtiTokenRetriever;
