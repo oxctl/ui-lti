@@ -80,7 +80,7 @@ describe('LtiTokenRetriever Test Suite', () => {
                 <h1>Mock Child Element</h1>
             </LtiTokenRetriever>
         )
-        expect(await screen.findByText('TypeError: Failed to fetch')).toBeDefined()
+        expect(await screen.findByText('Failed to fetch')).toBeDefined()
     })
 
     it('Should show nice message when no permissions', async () => {
@@ -96,7 +96,7 @@ describe('LtiTokenRetriever Test Suite', () => {
                 <h1>Mock Child Element</h1>
             </LtiTokenRetriever>
         )
-        expect(await screen.findByText('Error: Sorry the tool is not currently available to you.')).toBeDefined()
+        expect(await screen.findByText('Sorry the tool is not currently available to you.')).toBeDefined()
     })
 
     it('Should follow happy path, extract token, get response from server', async () => {
