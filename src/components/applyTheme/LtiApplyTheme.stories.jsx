@@ -8,6 +8,7 @@ import { Text } from '@instructure/ui-text'
 export default {
     title: "LtiApplyTheme",
     component: LtiApplyTheme,
+    tags: ['autodocs'],
     argTypes: {
         highContrast: {
             control: 'boolean'

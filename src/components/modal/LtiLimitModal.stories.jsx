@@ -8,5 +8,6 @@ NoLimit.args = {}
 
 export default {
   title: "LtiLimitModal",
-  component: LtiLimitModal
+  component: LtiLimitModal,
+  tags: ['autodocs']
 }
