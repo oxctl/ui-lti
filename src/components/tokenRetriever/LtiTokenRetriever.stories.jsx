@@ -59,5 +59,6 @@ export default {
     handleJwt: {action: 'JWT Retrieved'},
     ltiServer: {control: 'text'},
     location: {control: 'object'}
-  }
+  },
+  tags: ['autodocs']
 };

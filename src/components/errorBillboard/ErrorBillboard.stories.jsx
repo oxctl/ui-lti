@@ -33,5 +33,6 @@ export default {
     args: {
         children: <div>Normal content that should be displayed</div>
     },
+    tags: ['autodocs']
 }
 
