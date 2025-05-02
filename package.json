@@ -39,15 +39,15 @@
     "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@vitejs/plugin-react": "^4.4.1",
     "jsdom": "^25.0.1",
     "msw": "^2.6.6",
     "msw-storybook-addon": "^2.0.4",
     "prop-types": "^15.7.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "vite": "^6.2.6",
-    "vitest": "^3.0.5"
+    "vite": "^6.3.4",
+    "vitest": "^3.1.2"
   },
   "peerDependencies": {
     "@instructure/canvas-theme": ">= 7.0.0",
