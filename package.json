@@ -13,9 +13,9 @@
   "type": "module",
   "sideEffects": false,
   "scripts": {
-    "storybook": "storybook dev -p 6006",
-    "storybook-https": "storybook dev -p 6006 --https --ssl-cert localhost.pem --ssl-key localhost-key.pem",
-    "build-storybook": "storybook build",
+    "storybook": "sb dev -- -p 6006",
+    "storybook-https": "sb dev -- -p 6006 --https --ssl-cert localhost.pem --ssl-key localhost-key.pem",
+    "build-storybook": "sb build",
     "build": "vite build",
     "start": "vite",
     "test": "vitest"
@@ -33,23 +33,20 @@
     "@instructure/ui-modal": "^10.12.0",
     "@instructure/ui-spinner": "^10.12.0",
     "@rollup/plugin-node-resolve": "^15.3.0",
-    "@storybook/addon-actions": "^7.6.9",
-    "@storybook/addon-essentials": "^7.6.9",
-    "@storybook/addon-links": "^7.6.9",
-    "@storybook/react": "^7.6.9",
-    "@storybook/react-webpack5": "^7.6.9",
+    "@storybook/addon-essentials": "^8.6.12",
+    "@storybook/react-vite": "^8.6.12",
     "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@vitejs/plugin-react": "^4.4.1",
     "jsdom": "^25.0.1",
     "msw": "^2.6.6",
+    "msw-storybook-addon": "^2.0.4",
     "prop-types": "^15.7.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "storybook": "^7.6.20",
-    "vite": "^6.1.0",
-    "vitest": "^3.0.5"
+    "vite": "^6.3.4",
+    "vitest": "^3.1.2"
   },
   "peerDependencies": {
     "@instructure/canvas-theme": ">= 7.0.0",
@@ -68,5 +65,10 @@
     "prop-types": ">=15.0.0",
     "react": ">= 18.0.0",
     "react-dom": ">= 18.0.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

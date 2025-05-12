@@ -1,26 +1,14 @@
-module.exports = {
-  "stories": [
-    "../src/**/*.stories.mdx",
-    "../src/**/*.stories.@(js|jsx|ts|tsx)"
+const config = {
+  // Required
+  framework: '@storybook/react-vite',
+  stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  // Optional
+  addons: [
+    '@storybook/addon-essentials'
   ],
-
-  "addons": [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials"
-  ],
-
   docs: {
-    autodocs: true
+    autodocs: 'tag',
   },
-
-  framework: {
-    name: "@storybook/react-webpack5",
-    options: {}
-  },
-
-  features: {
-    storyStoreV7: false,
-  },
-
   staticDirs: ['../public'],
-}
+};
+export default config;

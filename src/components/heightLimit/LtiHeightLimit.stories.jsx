@@ -10,5 +10,6 @@ Default.args = {}
 
 export default {
     title: "LtiHeightLimit",
-    component: LtiHeightLimit
+    component: LtiHeightLimit,
+    tags: ['autodocs']
 }
