@@ -2,6 +2,8 @@
 
 This project was created as a central repository for common UI components that help when building LTI tools that plugin to the [Canvas LMS](https://www.instructure.com/en-gb/canvas) and build upon the [Instructure UI](https://instructure.design/) component library.
 
+**Note:** This library's major version matches the major version of Instructure UI that it depends on. For example, version `10.x.x` of this library requires Instructure UI `10.x` packages as peer dependencies.
+
 [![Node.js CI](https://github.com/oxctl/ui-lti/actions/workflows/node.js.yml/badge.svg)](https://github.com/oxctl/ui-lti/actions/workflows/node.js.yml)
 
 ## Using this library
