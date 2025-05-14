@@ -27,8 +27,8 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
   release:
     permissions:
-      contents: read
-      releases: write
+      # Needs write to perform releases.
+      contents: write
     needs: publish-npm
     runs-on: ubuntu-latest
     steps:
