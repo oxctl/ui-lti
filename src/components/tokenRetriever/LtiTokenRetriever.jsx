@@ -11,7 +11,7 @@ import ErrorBillboard from "../errorBillboard/ErrorBillboard.jsx";
  * - no token in the URL
  * - token cannot be retrieved
  */
-const LtiTokenRetriever = ({ ltiServer, handleJwt, children, location = window.location }) => {
+export const LtiTokenRetriever = ({ ltiServer, handleJwt, children, location = window.location }) => {
   const [state, setState] = useState({
     loading: true,
     error: null
