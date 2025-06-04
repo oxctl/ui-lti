@@ -69,7 +69,7 @@ export const LtiTokenRetriever = ({ ltiServer, handleJwt, children, location = w
     };
 
     fetchToken();
-  }, [handleJwt, ltiServer]);
+  }, [ltiServer]);
 
   const getToken = () => {
     const params = new URLSearchParams(location.search);
