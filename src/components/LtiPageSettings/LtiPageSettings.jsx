@@ -79,7 +79,7 @@ function LtiPageSettings({ children, debug = false, themeRetries = 1 }) {
             else {
                 logDebug('Received unexpected message: ' + JSON.stringify(event.data, null, 2))
             }
-        })
+        }
         // Now we handle responses ask Canvas for the settings.
         logDebug('Requesting page settings from Canvas')
         window.addEventListener('message', messageHandler)
