@@ -50,7 +50,7 @@ function LtiPageSettings({ children, debug = false, themeRetries = 1 }) {
     useEffect(() => {
         let receivedPageSettings = false
         const targetWindow = window.parent || window.opener
-        window.addEventListener('message', (event) => {
+        const messageHandler = (event) => {
             if (event.data.subject === 'lti.getPageSettings.response') {
                 logDebug('Received page settings response from: ' + event.origin + ' with data: ' + JSON.stringify(event.data, null, 2))
                 const pageSettings = event.data.pageSettings
@@ -82,14 +82,19 @@ function LtiPageSettings({ children, debug = false, themeRetries = 1 }) {
         })
         // Now we handle responses ask Canvas for the settings.
         logDebug('Requesting page settings from Canvas')
+        window.addEventListener('message', messageHandler)
         targetWindow.postMessage({ subject: 'lti.getPageSettings' }, '*')
 
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
             if (!receivedPageSettings) {
                 console.warn('No page settings received, using default theme')
             }
         }, 2000)
-
+        return () => {
+            logDebug('Cleaning up message handler')
+            window.removeEventListener('message', messageHandler)
+            clearTimeout(timeoutId)
+        }
     }, [])
 
     return (
