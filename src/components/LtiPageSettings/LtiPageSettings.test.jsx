@@ -4,7 +4,7 @@ import {act, fireEvent, render, screen} from '@testing-library/react'
 import {describe, expect, it} from 'vitest'
 import {LtiPageSettings, PageSettingsContext} from "./LtiPageSettings.jsx";
 
-describe('LtiApplyTheme Test Suite', () => {
+describe('LtiPageSettings Test Suite', () => {
     it('renders children correctly and sets context', async () => {
         window.parent = {
             postMessage(message, targetOrigin, transfer) {
