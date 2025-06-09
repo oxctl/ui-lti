@@ -54,8 +54,8 @@
     "prop-types": "^15.7.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "vite": "^6.3.4",
-    "vitest": "^3.1.2"
+    "vite": "6.3.5",
+    "vitest": "^3.2.2"
   },
   "peerDependencies": {
     "@instructure/canvas-theme": ">= 10.0.0",
