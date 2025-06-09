@@ -1,6 +1,6 @@
 import {useContext} from 'react'
 import '@testing-library/jest-dom';
-import {act, fireEvent, render, screen} from '@testing-library/react'
+import {render, screen, waitFor} from '@testing-library/react'
 import {describe, expect, it} from 'vitest'
 import {LtiPageSettings, PageSettingsContext} from "./LtiPageSettings.jsx";
 
@@ -20,20 +20,21 @@ describe('LtiPageSettings Test Suite', () => {
                 }
             }
         }
-        
+
         function ContextConsumer() {
             const context = useContext(PageSettingsContext);
             return <>{context.active_brand_config_json_url}</>
-            
+
         }
-        
-        act(() => {
-            render(<LtiPageSettings>
-                <h1>LtiPageSettings test</h1>
-                <span data-testid='consumer'><ContextConsumer/></span>
-            </LtiPageSettings>)
+
+        render(<LtiPageSettings>
+            <h1>LtiPageSettings test</h1>
+            <span data-testid='consumer'><ContextConsumer/></span>
+        </LtiPageSettings>)
+        expect(await screen.findByRole('heading')).toHaveTextContent("LtiPageSettings test")
+        // Due to to the asynchronous nature of the postMessage, we need to wait for the context to be set
+        await waitFor(() => {
+            expect(screen.getByTestId('consumer')).toHaveTextContent("http://example.com/theme.json")
         })
-        expect(await screen.getByRole('heading')).toHaveTextContent("LtiPageSettings test")
-        expect(await screen.findByTestId('consumer')).toHaveTextContent("http://example.com/theme.json")
     })
 })
