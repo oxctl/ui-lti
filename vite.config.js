@@ -12,6 +12,9 @@ export default defineConfig({
         resolve()
     ],
     build: {
+        sourcemap: true,
+        // As this library will be re-compiled by the host application, we don't need to minify it.
+        minify: false,
         lib: {
             entry: 'src/index.js',
             formats: ['es', 'cjs']
@@ -22,7 +25,6 @@ export default defineConfig({
                 exports: 'named',
                 // This is so that we can have tree shaking working.
                 preserveModules: true,
-                format: 'es'
                 // generatedCode: 'es2015',
             },
         }
