@@ -19,6 +19,9 @@ export class LtiHeightLimit extends React.Component {
     debug: PropTypes.bool,
     children: PropTypes.node.isRequired
   }
+  
+  // The last height we resized to, this is used to prevent unnecessary resizing.
+  lastHeight = -1
 
   state = {
     // The height to resize to when we are limit our height.
@@ -57,6 +60,10 @@ export class LtiHeightLimit extends React.Component {
         // scroll bar showing when the height being rounded down. Canvas appears to allow a float (it works), but 
         // we round up (ceil) so that we're complying with the API documentation in case they change in the future.
         Math.ceil(document.documentElement.getBoundingClientRect().height)
+    if (height === this.lastHeight) {
+      return
+    }
+    this.lastHeight = height
     this.logDebug(`Resizing to ${height}`)
     window.parent.postMessage(JSON.stringify({
       subject: 'lti.frameResize',
@@ -112,7 +119,8 @@ export class LtiHeightLimit extends React.Component {
         return this.state.limit
       },
       set: (limit) => {
-        this.setState({ limit })
+        this.logDebug(`Updating limit: ${limit}`)
+        this.setState({ limit }, () => this.resize())
       }
     }}>
       <div style={{
