@@ -38,6 +38,12 @@ export class LtiHeightLimit extends React.Component {
     this.resize()
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevState.limit && this.state.limit) {
+      this.resize()
+    }
+  }
+
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeListener)
     window.removeEventListener('message', this.messageListener)
