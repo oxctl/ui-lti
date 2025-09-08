@@ -28,7 +28,12 @@ export class LaunchOAuth extends React.Component {
     /**
      * The proxy server address.
      */
-    server: PropTypes.object.isRequired
+    server: PropTypes.oneOfType([
+        PropTypes.shape({
+          proxyServer: PropTypes.string.isRequired
+        }),
+        PropTypes.string
+    ]).isRequired
   }
 
   static defaultProps = {
@@ -59,8 +64,10 @@ export class LaunchOAuth extends React.Component {
     if(promptLogin) {
 
       let proxyServer = ""
-      if(server) {
-          proxyServer = server.proxyServer+ "/tokens/check"
+      if(typeof server === "string") {
+        proxyServer = server + "/tokens/check"
+      } else {
+          proxyServer = server.proxyServer + "/tokens/check"
       }
 
       return <Fragment>
