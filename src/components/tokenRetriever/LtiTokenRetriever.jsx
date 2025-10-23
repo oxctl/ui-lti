@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { Spinner } from '@instructure/ui-spinner';
 import ErrorBillboard from "../errorBillboard/ErrorBillboard.jsx";
@@ -23,7 +23,7 @@ export const LtiTokenRetriever = ({ ltiServer, handleJwt, children, location = w
       const server = getServer();
 
       if (!token) {
-        setState({ loading: false, error: "No token found to load" });
+        setState({ loading: false, error: "No id found to load token with" });
         return;
       }
 
@@ -69,7 +69,26 @@ export const LtiTokenRetriever = ({ ltiServer, handleJwt, children, location = w
     };
 
     fetchToken();
-  }, [handleJwt, ltiServer]);
+  }, [ltiServer]);
+  
+  // Log a warning if the value of handleJwt changes as it's not how the component should be used.
+  const handleJwtRef = useRef(handleJwt);
+
+  useEffect(() => {
+    if (handleJwtRef.current !== handleJwt) {
+      // Helpful developer warning — prefer using a stable callback (e.g. useCallback) so
+      // the component doesn't see handleJwt as changing every render.
+      try {
+        console.warn(
+          'LtiTokenRetriever: prop `handleJwt` changed. This component should have a stable callback (avoid creating a new function each render, ie useCallback()).'
+        );
+      } catch (e) {
+      }
+    }
+    // Update ref after comparison so initial mount won't trigger the warning.
+    handleJwtRef.current = handleJwt;
+  }, [handleJwt]);
+  
 
   const getToken = () => {
     const params = new URLSearchParams(location.search);
