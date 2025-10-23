@@ -34,7 +34,7 @@ describe('LtiTokenRetriever Test Suite', () => {
                 <h1>Mock Child Element</h1>
             </LtiTokenRetriever>
         )
-        expect(screen.getByText('No token found to load')).toBeDefined()
+        expect(screen.getByText('No id found to load token with')).toBeDefined()
     });
 
     it('Should find token in URL', () => {
