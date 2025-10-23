@@ -18,7 +18,6 @@ jobs:
         with:
           node-version-file: .nvmrc
           registry-url: https://registry.npmjs.org/
-          always-auth: true
       - run: npm ci
       - run: npm run build
       - run: npm publish --access public
