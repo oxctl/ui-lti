@@ -9,6 +9,10 @@
     "import": "./dist/ui-lti.js",
     "require": "./dist/ui-lti.cjs"
   },
+  "repository": {
+    "url": "https://github.com/oxctl/ui-lti"
+  },
+  "homepage": "https://github.com/oxctl/ui-lti#readme",
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
