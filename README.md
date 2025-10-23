@@ -42,27 +42,23 @@ Builds a new update of the library.
 
 To publish the library to NPM so that it would be available for usage
 
-### `npm link`
+### Local Testing
 
-**This is currently broken**
+It's helpful to be able to test this library locally before releasing. To do this first bundle up the library:
 
-Before doing this you need to remove any peerDependencies that are in the `node_modules` folder as otherwise you can end up with duplicates in the build and react in particular has problems with this. A quick way to do this is to run:
+```bash
+npm run build && npm pack --pack-destination /tmp
+```
 
-     npm run remove-peers
+This will put a copy of build into `/tmp` you can then "upgrade" a project to use this local copy by running:
 
-This will remove all peerDependencies. When you wish to use storybook again you will need to re-install all the missing dependencies with `npm ci`.
+```bash
+npm install /tmp/oxctl-ui-lti-10.0.2.tgz
+```
 
-For connecting and debugging at runtime with another repo, this means you don't have to publish changes to npm to use them:
-
- - in @oxctl/ui-lti
-   ```
-   npm link
-   ```
-
- - in repo using/testing this library
-    ```
-    npm link @oxctl/ui-lti
-    ```
+This command references the current version of the package so will need changing as the package version increments. If a
+change is made in the future to the library and this needs to be re-rested all these commands need to be re-run to get
+an updated version of the library available in the project that is testing it.
 
 ### Releasing
 
