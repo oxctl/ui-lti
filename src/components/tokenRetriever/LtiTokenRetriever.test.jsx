@@ -25,8 +25,16 @@ describe('LtiTokenRetriever Test Suite', () => {
     //  Close server after all tests
     afterAll(() => server.close())
 
+    // Clear sessionStorage before each test
+    beforeEach(() => {
+        sessionStorage.clear()
+        mockJwtFn.mockClear()
+    })
+
     // Reset handlers after each test `important for test isolation`
-    afterEach(() => server.resetHandlers())
+    afterEach(() => {
+        server.resetHandlers()
+    })
 
     it('Should show an error when no token', () => {
         render(
@@ -122,7 +130,78 @@ describe('LtiTokenRetriever Test Suite', () => {
         expect(await screen.findAllByText('Mock Child Element')).toBeDefined()
         expect(mockJwtFn).toHaveBeenCalledWith(jwt, mockServer)
     })
-    
+
+    it('Should use cached token when network error occurs and cached token exists', async () => {
+        const cachedJwt = 'cached.jwt.token'
+        const search = '?token=1234&other=something'
+        
+        // Pre-populate sessionStorage with a cached JWT
+        const tokenData = {
+            token: cachedJwt,
+            timestamp: Date.now()
+        }
+        sessionStorage.setItem('jwt', JSON.stringify(tokenData))
+        
+        vi.spyOn(window, 'location', 'get').mockReturnValue({search})
+        server.use(
+            http.post('http://server.test/token', async () => {
+                return HttpResponse.error()
+            })
+        )
+        render(
+            <LtiTokenRetriever handleJwt={mockJwtFn} ltiServer={mockServer}>
+                <h1>Mock Child Element</h1>
+            </LtiTokenRetriever>
+        )
+        
+        // Should succeed and use the cached token
+        expect(await screen.findAllByText('Mock Child Element')).toBeDefined()
+        expect(mockJwtFn).toHaveBeenCalledWith(cachedJwt, mockServer)
+    })
+
+    it('Should use cached token when server returns non-ok response and cached token exists', async () => {
+        const cachedJwt = 'cached.jwt.token'
+        const search = '?token=1234&other=something'
+        
+        // Pre-populate sessionStorage with a cached JWT
+        const tokenData = {
+            token: cachedJwt,
+            timestamp: Date.now()
+        }
+        sessionStorage.setItem('jwt', JSON.stringify(tokenData))
+        
+        vi.spyOn(window, 'location', 'get').mockReturnValue({search})
+        server.use(
+            http.post('http://server.test/token', async () => {
+                return HttpResponse.text('Not found', {status: 404})
+            })
+        )
+        render(
+            <LtiTokenRetriever handleJwt={mockJwtFn} ltiServer={mockServer}>
+                <h1>Mock Child Element</h1>
+            </LtiTokenRetriever>
+        )
+        
+        // Should succeed and use the cached token
+        expect(await screen.findAllByText('Mock Child Element')).toBeDefined()
+        expect(mockJwtFn).toHaveBeenCalledWith(cachedJwt, mockServer)
+    })
+
+    it('Should still show error when network error occurs and no cached token exists', async () => {
+        const search = '?token=1234&other=something'
+        vi.spyOn(window, 'location', 'get').mockReturnValue({search})
+        server.use(
+            http.post('http://server.test/token', async () => {
+                return HttpResponse.error()
+            })
+        )
+        render(
+            <LtiTokenRetriever handleJwt={mockJwtFn} ltiServer={mockServer}>
+                <h1>Mock Child Element</h1>
+            </LtiTokenRetriever>
+        )
+        expect(await screen.findByText('Failed to fetch')).toBeDefined()
+    })
 
 
 });

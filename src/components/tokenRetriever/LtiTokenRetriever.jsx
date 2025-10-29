@@ -64,6 +64,13 @@ export const LtiTokenRetriever = ({ ltiServer, handleJwt, children, location = w
         saveJwt(jwt);
         setState({ loading: false, error: null });
       } catch (error) {
+        // Try to get cached JWT before failing
+        const cachedJwt = loadJwt();
+        if (cachedJwt) {
+          handleJwt(cachedJwt, server);
+          setState({ loading: false, error: null });
+          return;
+        }
         setState({ loading: false, error: error.message });
       }
     };
