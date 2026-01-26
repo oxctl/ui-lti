@@ -4,23 +4,47 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const LtiHeightLimitContext = React.createContext({
-  get: () => {},
+type LtiHeightLimitContextValue = {
+  get: () => boolean
+  set: (limit: boolean) => void
+}
+
+const LtiHeightLimitContext = React.createContext<LtiHeightLimitContextValue>({
+  get: () => false,
   set: () => {}
 })
+
+type LtiHeightLimitProps = {
+  debug?: boolean
+  children: React.ReactNode
+}
+
+type LtiHeightLimitState = {
+  height: number | 'auto'
+  limit: boolean
+  debug: boolean
+}
+
+type LtiWindowSizeMessage = {
+  subject: string
+  height?: number
+  offset?: {
+    top?: number
+  }
+}
 /**
  * This is a Component that will attempt to resize the LTI iframe to the size of the content, but also when asked
  * will attempt to remove all the scroll bars from the iframe so that things like modals can be displayed.
  * This is useful when needing to display something like a Modal in the middle of the viewport (or close to it).
  */
-export class LtiHeightLimit extends React.Component {
+export class LtiHeightLimit extends React.Component<LtiHeightLimitProps, LtiHeightLimitState> {
 
   static propTypes = {
     debug: PropTypes.bool,
     children: PropTypes.node.isRequired
   }
 
-  state = {
+  state: LtiHeightLimitState = {
     // The height to resize to when we are limit our height.
     height: 'auto',
     // Should we limit this component's height to that of the containing iframe?
@@ -28,6 +52,9 @@ export class LtiHeightLimit extends React.Component {
     // By default we don't debug height limit changes
     debug: false
   }
+
+  observer: MutationObserver | null = null
+  message?: LtiWindowSizeMessage
 
   componentDidMount() {
     window.addEventListener('resize', this.resizeListener)
@@ -38,7 +65,7 @@ export class LtiHeightLimit extends React.Component {
     this.resize()
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: LtiHeightLimitProps, prevState: LtiHeightLimitState) {
     if (!prevState.limit && this.state.limit) {
       this.resize()
     }
@@ -47,10 +74,10 @@ export class LtiHeightLimit extends React.Component {
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeListener)
     window.removeEventListener('message', this.messageListener)
-    this.observer.disconnect()
+    this.observer?.disconnect()
   }
   
-  logDebug = (message) => {
+  logDebug = (message: string) => {
     if (this.props.debug) {
       console.debug(message)
     }
@@ -87,10 +114,10 @@ export class LtiHeightLimit extends React.Component {
     }
   }
 
-  messageListener = e => e.data && this.messageHandler(e)
+  messageListener = (e: MessageEvent) => e.data && this.messageHandler(e)
 
-  messageHandler = (event) => {
-    let message
+  messageHandler = (event: MessageEvent) => {
+    let message: LtiWindowSizeMessage
     try {
       message = typeof event.data === 'string' ? JSON.parse(event.data) : event.data
     } catch (err) {
@@ -100,10 +127,13 @@ export class LtiHeightLimit extends React.Component {
     if (message.subject === 'lti.fetchWindowSize.response') {
       this.message = message
       let height = message.height
+      if (typeof height !== 'number') {
+        return
+      }
       // When launched from a deep linking placement there doesn't appear to be a offset in the message
       // returned
       if (message.offset) {
-        height -= message.offset.top
+        height -= message.offset.top ?? 0
       }
       this.logDebug(`Got height message with value of: ${height}`)
       this.setState({height})

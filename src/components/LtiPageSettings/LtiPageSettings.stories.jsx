@@ -1,5 +1,5 @@
 import React from 'react'
-import {LtiPageSettings} from './LtiPageSettings.jsx'
+import {LtiPageSettings} from './LtiPageSettings'
 import { ColorIndicator } from '@instructure/ui-color-picker'
 import { View } from '@instructure/ui-view'
 import { Avatar } from '@instructure/ui-avatar'

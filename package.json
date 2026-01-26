@@ -5,9 +5,13 @@
   "description": "Common UI components that are commonly used for LTI tools in the Canvas LMS",
   "module": "dist/ui-lti.js",
   "main": "dist/ui-lti.cjs",
+  "types": "dist/index.d.ts",
   "exports": {
-    "import": "./dist/ui-lti.js",
-    "require": "./dist/ui-lti.cjs"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/ui-lti.js",
+      "require": "./dist/ui-lti.cjs"
+    }
   },
   "repository": {
     "url": "https://github.com/oxctl/ui-lti"
@@ -20,13 +24,14 @@
     "storybook": "sb dev -- -p 6006",
     "storybook-https": "sb dev -- -p 6006 --https --ssl-cert localhost.pem --ssl-key localhost-key.pem",
     "build-storybook": "sb build",
-    "build": "vite build",
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "prepack": "npm run build",
     "start": "vite",
     "test": "vitest"
   },
   "files": [
-    "src/*",
-    "dist/*"
+    "dist/**",
+    "src/**"
   ],
   "devDependencies": {
     "@instructure/canvas-theme": "^10.18.0",
@@ -51,6 +56,8 @@
     "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.4.1",
     "jsdom": "^25.0.1",
     "msw": "^2.6.6",
@@ -58,6 +65,7 @@
     "prop-types": "^15.7.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "typescript": "^5.5.4",
     "vite": "6.4.1",
     "vitest": "^3.2.4"
   },

@@ -1,6 +1,6 @@
 import React from 'react'
 import '@testing-library/jest-dom';
-import LtiHeightLimit from "./LtiHeightLimit.jsx";
+import LtiHeightLimit from "./LtiHeightLimit";
 import {render, screen} from '@testing-library/react'
 import {describe, expect, it, vi} from 'vitest'
 

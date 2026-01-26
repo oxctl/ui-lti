@@ -2,7 +2,7 @@ import React from 'react'
 import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react'
 import {describe, expect, it, vi} from 'vitest'
-import LtiTokenRetriever from "./LtiTokenRetriever.jsx";
+import LtiTokenRetriever from "./LtiTokenRetriever";
 import {setupServer} from "msw/node";
 import {delay, http, HttpResponse} from "msw";
 

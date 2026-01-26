@@ -1,7 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { Spinner } from '@instructure/ui-spinner';
-import ErrorBillboard from "../errorBillboard/ErrorBillboard.jsx";
+import ErrorBillboard from "../errorBillboard/ErrorBillboard";
+
+type TokenRetrieverState = {
+  loading: boolean
+  error: string | null
+}
+
+type LocationLike = Pick<Location, 'search'>
+
+type LtiTokenRetrieverProps = {
+  ltiServer?: string | null
+  handleJwt: (jwt: string, server: string) => void
+  children: React.ReactNode
+  location?: LocationLike
+}
 
 /**
  * Looks for a one time token in the URL parameters and then attempts to use this to retrieve a JWT token
@@ -11,8 +25,8 @@ import ErrorBillboard from "../errorBillboard/ErrorBillboard.jsx";
  * - no token in the URL
  * - token cannot be retrieved
  */
-export const LtiTokenRetriever = ({ ltiServer, handleJwt, children, location = window.location }) => {
-  const [state, setState] = useState({
+export const LtiTokenRetriever = ({ ltiServer, handleJwt, children, location = window.location }: LtiTokenRetrieverProps) => {
+  const [state, setState] = useState<TokenRetrieverState>({
     loading: true,
     error: null
   });
@@ -59,12 +73,16 @@ export const LtiTokenRetriever = ({ ltiServer, handleJwt, children, location = w
 
         const json = await response.json();
         const jwt = json.jwt || json.token_value;
+        if (!jwt) {
+          throw new Error("Failed to load token.");
+        }
 
-        handleJwt(jwt, server);
-        saveJwt(jwt);
-        setState({ loading: false, error: null });
+          handleJwt(jwt, server);
+          saveJwt(jwt);
+          setState({ loading: false, error: null });
       } catch (error) {
-        setState({ loading: false, error: error.message });
+        const message = error instanceof Error ? error.message : "Failed to load token.";
+        setState({ loading: false, error: message });
       }
     };
 
@@ -104,7 +122,7 @@ export const LtiTokenRetriever = ({ ltiServer, handleJwt, children, location = w
     return server ? decodeURIComponent(server) : null;
   };
 
-  const saveJwt = (jwt) => {
+  const saveJwt = (jwt: string | null) => {
     if (!jwt) return;
 
     try {
@@ -121,12 +139,14 @@ export const LtiTokenRetriever = ({ ltiServer, handleJwt, children, location = w
     }
   };
 
-  const loadJwt = () => {
+  const loadJwt = (): string | null => {
     try {
-      const data = JSON.parse(sessionStorage.getItem('jwt'));
+      const stored = localStorage.getItem('jwt');
+      if (!stored) return null;
+      const data = JSON.parse(stored);
       if (!data) return null;
 
-      return data.token;
+      return data.token ?? null;
     } catch (e) {
       if (!(e instanceof DOMException)) {
         throw e;
