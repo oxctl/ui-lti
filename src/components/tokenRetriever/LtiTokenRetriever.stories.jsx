@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LtiTokenRetriever from './LtiTokenRetriever.jsx';
+import LtiTokenRetriever from './LtiTokenRetriever';
 import {http, delay, HttpResponse} from "msw";
 
 const Template = (args) =>

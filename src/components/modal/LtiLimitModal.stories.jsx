@@ -1,5 +1,5 @@
 import React from 'react';
-import LtiLimitModal from './LtiLimitModal.jsx';
+import LtiLimitModal from './LtiLimitModal';
 
 const Template = (args) => <LtiLimitModal {...args}/>
 

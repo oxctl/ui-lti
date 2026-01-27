@@ -3,10 +3,24 @@ import PropTypes from 'prop-types'
 import { Billboard } from '@instructure/ui-billboard'
 import { IconWarningLine } from '@instructure/ui-icons'
 
+type LaunchOAuthServer =
+  | string
+  | {
+      proxyServer: string
+    }
+
+type LaunchOAuthProps = {
+  accessToken?: string | null
+  children: React.ReactNode
+  promptUserLogin: () => void
+  promptLogin: boolean
+  server: LaunchOAuthServer
+}
+
 /**
  * This either displays the child components or it displays a message asking the user to login.
  */
-export class LaunchOAuth extends React.Component {
+export class LaunchOAuth extends React.Component<LaunchOAuthProps> {
 
   static propTypes = {
     /**
@@ -40,10 +54,12 @@ export class LaunchOAuth extends React.Component {
     accessToken: null
   }
 
-  constructor(props) {
+  constructor(props: LaunchOAuthProps) {
     super(props)
-    this.formRef = React.createRef()
+    this.formRef = React.createRef<HTMLFormElement>()
   }
+
+  formRef: React.RefObject<HTMLFormElement>
 
   componentDidMount() {
     window.addEventListener("message", (event) => {
@@ -54,7 +70,7 @@ export class LaunchOAuth extends React.Component {
   }
 
   handleLogin = () => {
-    this.formRef.current.submit()
+    this.formRef.current?.submit()
   }
 
   render() {
@@ -74,7 +90,7 @@ export class LaunchOAuth extends React.Component {
         <Billboard
           heading="Please Grant Access"
           message="Please click this message to grant permission for this tool to access your account."
-          hero={(size) => <IconWarningLine size={size}/>}
+          hero={(size: unknown) => <IconWarningLine size={size}/>}
           size="large"
           onClick={() => this.handleLogin()}
         />

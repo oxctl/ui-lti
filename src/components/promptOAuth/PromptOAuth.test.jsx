@@ -2,7 +2,7 @@ import React from 'react'
 import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react'
 import {describe, expect, it, vi} from 'vitest'
-import PromptOAuth from "./PromptOAuth.jsx";
+import PromptOAuth from "./PromptOAuth";
 
 describe('PromptOAuth Test Suite', () => {
 

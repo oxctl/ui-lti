@@ -2,7 +2,7 @@ import {useContext} from 'react'
 import '@testing-library/jest-dom';
 import {render, screen, waitFor} from '@testing-library/react'
 import {describe, expect, it} from 'vitest'
-import {LtiPageSettings, PageSettingsContext} from "./LtiPageSettings.jsx";
+import {LtiPageSettings, PageSettingsContext} from "./LtiPageSettings";
 
 describe('LtiPageSettings Test Suite', () => {
     it('renders children correctly and sets context', async () => {

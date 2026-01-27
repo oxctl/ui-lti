@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ErrorBillboard from './ErrorBillboard.jsx';
+import ErrorBillboard from './ErrorBillboard';
 
 const Template = (args) => <ErrorBillboard {...args}/>
 
