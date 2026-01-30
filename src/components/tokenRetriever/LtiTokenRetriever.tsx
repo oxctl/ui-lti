@@ -4,7 +4,7 @@ import { Spinner } from '@instructure/ui-spinner';
 import ErrorBillboard from "../errorBillboard/ErrorBillboard";
 
 type TokenRetrieverState = {
-  loading: boolean
+  loading: boolean,
   error: string | null
 }
 
@@ -28,10 +28,15 @@ type LtiTokenRetrieverProps = {
 export const LtiTokenRetriever = ({ ltiServer, handleJwt, children, location = window.location }: LtiTokenRetrieverProps) => {
   const [state, setState] = useState<TokenRetrieverState>({
     loading: true,
-    error: null
+    error: null,
   });
+  // This is to prevent multiple loads of the token, especially when using <StrictMode> in development.
+  // A token can only be retrieved once so the second request always fails.
+  const hasFetchedRef = useRef(false);
 
   useEffect(() => {
+    if (hasFetchedRef.current) return;
+    hasFetchedRef.current = true;
     const fetchToken = async () => {
       const token = getToken();
       const server = getServer();
@@ -52,7 +57,7 @@ export const LtiTokenRetriever = ({ ltiServer, handleJwt, children, location = w
 
         const response = await fetch(`${server}/token`, {
           method: 'POST',
-          body: formData
+          body: formData,
         });
 
         if (!response.ok) {
