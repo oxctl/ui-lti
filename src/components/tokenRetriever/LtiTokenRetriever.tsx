@@ -8,13 +8,11 @@ type TokenRetrieverState = {
   error: string | null
 }
 
-type LocationLike = Pick<Location, 'search'>
-
 type LtiTokenRetrieverProps = {
   ltiServer?: string | null
   handleJwt: (jwt: string, server: string) => void
   children: React.ReactNode
-  location?: LocationLike
+  location?: Location
 }
 
 /**
