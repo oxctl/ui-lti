@@ -28,11 +28,10 @@ MessageAndHeading.args = {
 }
 
 export default {
-    title: "ErrorBillboard",
+    title: "Components/ErrorBillboard",
     component: ErrorBillboard,
     args: {
         children: <div>Normal content that should be displayed</div>
     },
     tags: ['autodocs']
 }
-

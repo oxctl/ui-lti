@@ -7,7 +7,7 @@ export const NoLimit = Template.bind({})
 NoLimit.args = {}
 
 export default {
-  title: "LtiLimitModal",
+  title: "Components/LtiLimitModal",
   component: LtiLimitModal,
   tags: ['autodocs']
 }

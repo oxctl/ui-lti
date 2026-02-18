@@ -9,7 +9,7 @@ export const Default = Template.bind({})
 Default.args = {}
 
 export default {
-    title: "LtiHeightLimit",
+    title: "Components/LtiHeightLimit",
     component: LtiHeightLimit,
     tags: ['autodocs']
 }
