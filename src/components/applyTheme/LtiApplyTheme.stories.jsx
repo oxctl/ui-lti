@@ -6,7 +6,7 @@ import { Avatar } from '@instructure/ui-avatar'
 import { Text } from '@instructure/ui-text'
 
 export default {
-    title: "LtiApplyTheme",
+    title: "Components/LtiApplyTheme",
     component: LtiApplyTheme,
     tags: ['autodocs'],
     argTypes: {

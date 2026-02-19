@@ -21,9 +21,9 @@
   "type": "module",
   "sideEffects": false,
   "scripts": {
-    "storybook": "sb dev -- -p 6006",
-    "storybook-https": "sb dev -- -p 6006 --https --ssl-cert localhost.pem --ssl-key localhost-key.pem",
-    "build-storybook": "sb build",
+    "storybook": "storybook dev -p 6006",
+    "storybook-https": "storybook dev -p 6006 --https --ssl-cert localhost.pem --ssl-key localhost-key.pem",
+    "build-storybook": "storybook build",
     "build": "vite build && tsc -p tsconfig.build.json",
     "prepack": "npm run build",
     "start": "vite",
@@ -49,9 +49,8 @@
     "@instructure/ui-themes": "^10.18.0",
     "@instructure/ui-view": "^10.18.0",
     "@rollup/plugin-node-resolve": "^15.3.0",
-    "@storybook/addon-essentials": "^8.6.15",
-    "@storybook/cli": "^8.6.15",
-    "@storybook/react-vite": "^8.6.15",
+    "@storybook/cli": "10.2.10",
+    "@storybook/react-vite": "10.2.10",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^16.0.1",
@@ -65,9 +64,11 @@
     "prop-types": "^15.7.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "storybook": "^10.2.10",
     "typescript": "^5.5.4",
     "vite": "6.4.1",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "@storybook/addon-docs": "^10.2.10"
   },
   "peerDependencies": {
     "@instructure/canvas-theme": ">= 10.0.0",

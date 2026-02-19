@@ -6,7 +6,7 @@ import { Avatar } from '@instructure/ui-avatar'
 import { Text } from '@instructure/ui-text'
 
 export default {
-    title: "LtiPageSettings",
+    title: "Components/LtiPageSettings",
     component: LtiPageSettings,
     tags: ['autodocs'],
     argTypes: {
