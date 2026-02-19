@@ -146,7 +146,7 @@ export const LtiTokenRetriever = ({ ltiServer, handleJwt, children, location = w
 
   const loadJwt = (): string | null => {
     try {
-      const stored = localStorage.getItem('jwt');
+      const stored = sessionStorage.getItem('jwt');
       if (!stored) return null;
       const data = JSON.parse(stored);
       if (!data) return null;
