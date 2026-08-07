@@ -2,13 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {Billboard} from '@instructure/ui-billboard'
 import {IconWarningLine} from '@instructure/ui-icons'
+import {HeroIconSize} from "@instructure/ui-billboard/types/Billboard/props";
+
+type ErrorBillboardProps = {
+  heading?: string
+  message?: string | null
+  children: React.ReactNode
+}
 
 /**
  * This either renders the child components or the error if it's present.
  * This is designed to handle toplevel errors when something has gone seriously wrong and we don't want to display
  * the rest of the application.
  */
-export class ErrorBillBoard extends React.Component {
+export class ErrorBillBoard extends React.Component<ErrorBillboardProps> {
 
   static propTypes = {
     // The heading of the error.
@@ -31,7 +38,7 @@ export class ErrorBillBoard extends React.Component {
       heading={heading}
       message={message}
       size="large"
-      hero={(size) => <IconWarningLine size={size}/>}
+      hero={(size: HeroIconSize) => <IconWarningLine size={size}/>}
     />) : children
   }
 }

@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import LtiApplyTheme from "./LtiApplyTheme.jsx";
+import LtiApplyTheme from "./LtiApplyTheme";
 import {act, render, screen} from '@testing-library/react'
 import {describe, expect, it} from 'vitest'
 

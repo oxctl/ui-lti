@@ -13,3 +13,4 @@ src/stories
 dist/
 storybook-static/
 *.pem
+debug-storybook.log

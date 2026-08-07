@@ -3,11 +3,22 @@ import PropTypes from 'prop-types'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import { canvasHighContrast, canvas } from '@instructure/ui-themes'
 
+type LtiApplyThemeProps = {
+  url?: string | null
+  highContrast?: boolean
+  children: React.ReactNode
+  maxRetries?: number
+}
+
+type LtiApplyThemeState = {
+  theme: Record<string, unknown>
+}
+
 /**
  * This attempts to load the theme from the supplied URL and then applies the theme to all the children.
  * If this isn't working, it's very possible you have multiple copies of instructure ui
  */
-export class LtiApplyTheme extends React.Component {
+export class LtiApplyTheme extends React.Component<LtiApplyThemeProps, LtiApplyThemeState> {
 
   static propTypes = {
     /**
@@ -26,7 +37,7 @@ export class LtiApplyTheme extends React.Component {
   }
 
   loading = false
-  state = {
+  state: LtiApplyThemeState = {
     theme: {}
   }
 
@@ -37,9 +48,10 @@ export class LtiApplyTheme extends React.Component {
   /**
    * This fetches the custom theme variables for the instance.
    */
-  fetchVariables = async () => {
+  fetchVariables = async (): Promise<Record<string, unknown>> => {
     if (this.props.url) {
-      for (let attempt = 0; attempt <= this.props.maxRetries; attempt++) {
+      const maxRetries = this.props.maxRetries ?? 1
+      for (let attempt = 0; attempt <= maxRetries; attempt++) {
         try {
           const variables = await fetch(this.props.url)
               .then(response => {
@@ -70,7 +82,7 @@ export class LtiApplyTheme extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps: LtiApplyThemeProps) {
     if (this.props.url !== prevProps.url
         || this.props.highContrast !== prevProps.highContrast
     ) {

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import PromptOAuth from "./PromptOAuth.jsx";
+import PromptOAuth from "./PromptOAuth";
 
 export default {
   title: 'Components/PromptOAuth',

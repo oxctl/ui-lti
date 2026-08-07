@@ -2,7 +2,7 @@ import React from 'react'
 import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react'
 import {describe, expect, it, vi} from 'vitest'
-import LtiTokenRetriever from "./LtiTokenRetriever.jsx";
+import LtiTokenRetriever from "./LtiTokenRetriever";
 import {setupServer} from "msw/node";
 import {delay, http, HttpResponse} from "msw";
 
@@ -122,7 +122,28 @@ describe('LtiTokenRetriever Test Suite', () => {
         expect(await screen.findAllByText('Mock Child Element')).toBeDefined()
         expect(mockJwtFn).toHaveBeenCalledWith(jwt, mockServer)
     })
-    
+
+    it('Does not make multiple fetch calls inside StrictMode', async () => {
+        const search = `?token=1234`
+        vi.spyOn(window, 'location', 'get').mockReturnValue({search})
+        mockJwtFn.mockClear()
+        let callCount = 0
+        server.use(
+            http.post('http://server.test/token', () => {
+                callCount += 1
+                return HttpResponse.json({jwt})
+            })
+        )
+        render(
+            <React.StrictMode>
+                <LtiTokenRetriever handleJwt={mockJwtFn} ltiServer={mockServer}>
+                    <h1>Mock Child Element</h1>
+                </LtiTokenRetriever>
+            </React.StrictMode>
+        )
+        expect(await screen.findAllByText('Mock Child Element')).toBeDefined()
+        expect(callCount).toBe(1)
+    })
 
 
 });

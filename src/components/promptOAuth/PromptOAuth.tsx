@@ -6,10 +6,18 @@ import {View} from "@instructure/ui-view";
 import {Button} from "@instructure/ui-buttons";
 import {InstUISettingsProvider} from "@instructure/emotion";
 
+type PromptOAuthProps = {
+    accessToken?: string
+    tokenGranted: () => void
+    needsGrant: boolean
+    server: string
+    toolName?: string
+}
+
 /**
  * Displays a modal asking the user to grant access when requested to.
  */
-export class PromptOAuth extends React.Component {
+export class PromptOAuth extends React.Component<PromptOAuthProps> {
 
     static propTypes = {
         /**

@@ -1,12 +1,12 @@
 import React from 'react'
-import LtiApplyTheme from './LtiApplyTheme.jsx'
+import LtiApplyTheme from './LtiApplyTheme'
 import { ColorIndicator } from '@instructure/ui-color-picker'
 import { View } from '@instructure/ui-view'
 import { Avatar } from '@instructure/ui-avatar'
 import { Text } from '@instructure/ui-text'
 
 export default {
-    title: "LtiApplyTheme",
+    title: "Components/LtiApplyTheme",
     component: LtiApplyTheme,
     tags: ['autodocs'],
     argTypes: {

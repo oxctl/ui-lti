@@ -2,7 +2,7 @@ import React from 'react'
 import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react'
 import {describe, expect, it} from 'vitest'
-import ErrorBillboard from "./ErrorBillboard.jsx";
+import ErrorBillboard from "./ErrorBillboard";
 
 const mockHeader = "Test Error Heading"
 let mockMessage = "Test Message"

@@ -16,7 +16,7 @@ export default defineConfig({
         // As this library will be re-compiled by the host application, we don't need to minify it.
         minify: false,
         lib: {
-            entry: 'src/index.js',
+            entry: 'src/index.ts',
             formats: ['es', 'cjs']
         },
         rollupOptions: {

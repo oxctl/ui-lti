@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import LaunchOAuth from './LaunchOAuth.jsx'
+import LaunchOAuth from './LaunchOAuth'
 
 export default {
   title: 'Components/LaunchOAuth',

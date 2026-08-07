@@ -1,0 +1,9 @@
+declare module '@instructure/emotion';
+declare module '@instructure/ui-themes';
+declare module '@instructure/ui-modal';
+declare module '@instructure/ui-spinner';
+declare module '@instructure/ui-billboard';
+declare module '@instructure/ui-icons';
+declare module '@instructure/ui-heading';
+declare module '@instructure/ui-view';
+declare module '@instructure/ui-buttons';

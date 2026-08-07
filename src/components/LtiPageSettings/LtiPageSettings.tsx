@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from 'react' 
+import type { ReactNode } from 'react'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 
@@ -6,7 +7,9 @@ import { canvas, canvasHighContrast } from '@instructure/ui-themes'
  * This context provides the page settings that nested components can use.
  * @type {React.Context<{}>}
  */
-const PageSettingsContext = createContext({})
+type PageSettings = Record<string, unknown>
+
+const PageSettingsContext = createContext<PageSettings>({})
 
 /**
  * This component retrieves the page settings from Canvas and if a theme is provided loads it and applies it to the children.
@@ -14,21 +17,27 @@ const PageSettingsContext = createContext({})
  * @param debug if true, debug messages will be logged to the console
  * @param themeRetries the number of times to retry fetching the theme if it fails
  */
-function LtiPageSettings({ children, debug = false, themeRetries = 1 }) {
+type LtiPageSettingsProps = {
+    children: ReactNode
+    debug?: boolean
+    themeRetries?: number
+}
+
+function LtiPageSettings({ children, debug = false, themeRetries = 1 }: LtiPageSettingsProps) {
     // A copy of the pages settings sent from Canvas.
-    const [pageSettings, setPageSettings] = useState({})
+    const [pageSettings, setPageSettings] = useState<PageSettings>({})
     // The theme for Instructure UI components.
-    const [theme, setTheme] = useState({})
+    const [theme, setTheme] = useState<Record<string, unknown>>({})
 
     /**
      * This is a debug function that will log messages to the console if debug is enabled.
      * @param message Message to log
      */
-    const logDebug = (message) => {
+    const logDebug = (message: string) => {
         debug && console.debug(message)
     }
 
-    const fetchTheme = async (themeUrl) => {
+    const fetchTheme = async (themeUrl?: string) => {
         if (themeUrl) {
             for (let attempt = 0; attempt <= themeRetries; attempt++) {
                 try {
@@ -50,19 +59,19 @@ function LtiPageSettings({ children, debug = false, themeRetries = 1 }) {
     useEffect(() => {
         let receivedPageSettings = false
         const targetWindow = window.parent || window.opener
-        const messageHandler = (event) => {
-            if (event.data.subject === 'lti.getPageSettings.response') {
+        const messageHandler = (event: MessageEvent) => {
+            if (event.data?.subject === 'lti.getPageSettings.response') {
                 logDebug('Received page settings response from: ' + event.origin + ' with data: ' + JSON.stringify(event.data, null, 2))
-                const pageSettings = event.data.pageSettings
+                const pageSettings = event.data.pageSettings as PageSettings | undefined
                 if (pageSettings) {
                     setPageSettings(pageSettings)
                     receivedPageSettings = true
-                    const highContrast = pageSettings.use_high_contrast
+                    const highContrast = pageSettings.use_high_contrast as boolean | undefined
                     if (highContrast) {
                         logDebug('High contrast mode enabled, not loading custom theme')
                         setTheme(canvasHighContrast)
                     } else {
-                        const themeUrl = pageSettings.active_brand_config_json_url
+                        const themeUrl = pageSettings.active_brand_config_json_url as string | undefined
                         logDebug('Loading theme from URL: ' + themeUrl)
                         fetchTheme(themeUrl)
                             .then(variables => {

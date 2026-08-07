@@ -1,5 +1,5 @@
 import React from 'react';
-import LtiHeightLimit from './LtiHeightLimit.jsx';
+import LtiHeightLimit from './LtiHeightLimit';
 
 const Template = () => <LtiHeightLimit>
       <div> Test Height Limit </div>
@@ -9,7 +9,7 @@ export const Default = Template.bind({})
 Default.args = {}
 
 export default {
-    title: "LtiHeightLimit",
+    title: "Components/LtiHeightLimit",
     component: LtiHeightLimit,
     tags: ['autodocs']
 }

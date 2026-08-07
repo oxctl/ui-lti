@@ -3,17 +3,40 @@
  */
 import React from 'react'
 import { Modal } from '@instructure/ui-modal'
-import { LtiHeightLimitContext } from '../heightLimit/LtiHeightLimit.jsx'
+import { LtiHeightLimitContext } from '../heightLimit/LtiHeightLimit'
 import PropTypes from 'prop-types'
+
+type LtiLimitModalProps = {
+  label?: string
+  debug?: boolean
+  onOpen?: () => void
+  onClose?: () => void
+  children?: React.ReactNode
+  [key: string]: unknown
+}
 
 /**
  * This correctly places Modals when displayed in an iframe.
  */
-export class LtiLimitModal extends React.Component {
+export class LtiLimitModal extends React.Component<LtiLimitModalProps> {
 
   static contextType = LtiHeightLimitContext
+  static propTypes = {
+    label: PropTypes.string,
+    debug: PropTypes.bool
+  }
+
+  static defaultProps = {
+    label: 'Modal',
+    onOpen: () => {},
+    onClose: () => {},
+    debug: false
+  }
+  declare context: React.ContextType<typeof LtiHeightLimitContext>
+
+  opened = false
   
-  logDebug(message) {
+  logDebug(message: string) {
     if (this.props.debug) {
       console.log(message)
     }
@@ -32,14 +55,14 @@ export class LtiLimitModal extends React.Component {
     this.logDebug('Opened Modal')
     this.opened = true
     this.context.set(true)
-     this.props.onOpen()
+    this.props.onOpen?.()
   }
   
   onClose = () => {
     this.logDebug('Closed Modal')
     this.opened = false
     this.context.set(false)
-    this.props.onClose()
+    this.props.onClose?.()
   }
 
   render() {
@@ -55,18 +78,6 @@ export class LtiLimitModal extends React.Component {
       {this.props.children}
     </Modal>
   }
-}
-
-LtiLimitModal.propTypes = {
-  label: PropTypes.string,
-  debug: PropTypes.bool
-}
-
-LtiLimitModal.defaultProps = {
-  label: 'Modal',
-  onOpen: () =>{},
-  onClose: () =>{},
-  debug: false
 }
 
 export default LtiLimitModal
