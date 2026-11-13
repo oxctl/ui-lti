@@ -174,7 +174,7 @@ function LtiPageSettings({
             ]} />
             <InstUISettingsProvider theme={appliedTheme}>
                 <PageSettingsContext.Provider value={pageSettings}>
-                    <div data-lti-dyslexic-font={useDyslexicFont ? id : undefined}>
+                    <div style={{ display: 'contents' }} data-lti-dyslexic-font={useDyslexicFont ? id : undefined}>
                         {children}
                     </div>
                 </PageSettingsContext.Provider>

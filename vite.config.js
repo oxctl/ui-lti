@@ -25,6 +25,7 @@ function libraryFontAssets() {
         async load(id) {
             if (id.startsWith('\0library-font:')) {
                 const path = id.slice('\0library-font:'.length)
+                this.addWatchFile(path)
                 const reference = this.emitFile({
                     type: 'asset',
                     name: basename(path),
