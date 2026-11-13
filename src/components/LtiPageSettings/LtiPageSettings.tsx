@@ -1,7 +1,11 @@
-import { createContext, useEffect, useState } from 'react' 
+import { createContext, useEffect, useId, useMemo, useState } from 'react'
 import type { ReactNode } from 'react'
-import { InstUISettingsProvider } from '@instructure/emotion'
+import { Global, InstUISettingsProvider } from '@instructure/emotion'
 import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import bundledFontUrl from './fonts/OpenDyslexic-Regular.woff2?url'
+import bundledBoldFontUrl from './fonts/OpenDyslexic-Bold.woff2?url'
+import bundledItalicFontUrl from './fonts/OpenDyslexic-Italic.woff2?url'
+import bundledBoldItalicFontUrl from './fonts/OpenDyslexic-BoldItalic.woff2?url'
 
 /**
  * This context provides the page settings that nested components can use.
@@ -16,18 +20,57 @@ const PageSettingsContext = createContext<PageSettings>({})
  * @param children the components to render which will be themed
  * @param debug if true, debug messages will be logged to the console
  * @param themeRetries the number of times to retry fetching the theme if it fails
+ * @param useDyslexicFont whether to apply OpenDyslexic, defaults to false
  */
 type LtiPageSettingsProps = {
     children: ReactNode
     debug?: boolean
     themeRetries?: number
+    useDyslexicFont?: boolean
+    /** Optional regular font URL; defaults to bundled OpenDyslexic. */
+    fontUrl?: string
+    /** Optional bold font URL; defaults to bundled OpenDyslexic. */
+    boldFontUrl?: string
+    /** Optional italic font URL; defaults to bundled OpenDyslexic. */
+    italicFontUrl?: string
+    /** Optional bold-italic font URL; defaults to bundled OpenDyslexic. */
+    boldItalicFontUrl?: string
 }
 
-function LtiPageSettings({ children, debug = false, themeRetries = 1 }: LtiPageSettingsProps) {
+function LtiPageSettings({
+    children,
+    debug = false,
+    themeRetries = 1,
+    useDyslexicFont = false,
+    fontUrl = bundledFontUrl,
+    boldFontUrl = bundledBoldFontUrl,
+    italicFontUrl = bundledItalicFontUrl,
+    boldItalicFontUrl = bundledBoldItalicFontUrl
+}: LtiPageSettingsProps) {
     // A copy of the pages settings sent from Canvas.
     const [pageSettings, setPageSettings] = useState<PageSettings>({})
     // The theme for Instructure UI components.
     const [theme, setTheme] = useState<Record<string, unknown>>({})
+    const id = useId()
+    const family = `LtiOpenDyslexic-${id}`
+    const fontFamily = `"${family}", sans-serif`
+    const selector = `[data-lti-dyslexic-font="${id}"]`
+    const appliedTheme = useMemo(() => {
+        if (!useDyslexicFont) return theme
+
+        return (ancestorTheme: Record<string, unknown>) => {
+            const baseTheme = Object.keys(theme).length ? theme : ancestorTheme
+            const typography = baseTheme.typography
+            return {
+                ...baseTheme,
+                typography: {
+                    ...(typeof typography === 'object' && typography !== null ? typography : {}),
+                    fontFamily,
+                    fontFamilyMonospace: fontFamily
+                }
+            }
+        }
+    }, [theme, useDyslexicFont, fontFamily])
 
     /**
      * This is a debug function that will log messages to the console if debug is enabled.
@@ -107,11 +150,36 @@ function LtiPageSettings({ children, debug = false, themeRetries = 1 }: LtiPageS
     }, [])
 
     return (
-        <InstUISettingsProvider theme={theme}>
-            <PageSettingsContext.Provider value={pageSettings}>
-                {children}
-            </PageSettingsContext.Provider>
-        </InstUISettingsProvider>
+        <>
+            <Global styles={[
+                ...[
+                    { url: fontUrl, weight: 400, style: 'normal' },
+                    { url: boldFontUrl, weight: 700, style: 'normal' },
+                    { url: italicFontUrl, weight: 400, style: 'italic' },
+                    { url: boldItalicFontUrl, weight: 700, style: 'italic' }
+                ].map(({ url, weight, style }) => ({
+                    '@font-face': {
+                        fontFamily: `"${family}"`,
+                        src: `url(${JSON.stringify(url)})`,
+                        fontWeight: weight,
+                        fontStyle: style,
+                        fontDisplay: 'swap'
+                    }
+                })),
+                {
+                    [`${selector}, ${selector} *`]: {
+                        fontFamily: `${fontFamily} !important`
+                    }
+                }
+            ]} />
+            <InstUISettingsProvider theme={appliedTheme}>
+                <PageSettingsContext.Provider value={pageSettings}>
+                    <div data-lti-dyslexic-font={useDyslexicFont ? id : undefined}>
+                        {children}
+                    </div>
+                </PageSettingsContext.Provider>
+            </InstUISettingsProvider>
+        </>
     )
 }
 
