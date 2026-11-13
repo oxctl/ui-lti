@@ -15,6 +15,21 @@ export default {
         },
         themeRetries: {
             control: 'number'
+        },
+        useDyslexicFont: {
+            control: 'boolean'
+        },
+        fontUrl: {
+            control: 'text'
+        },
+        boldFontUrl: {
+            control: 'text'
+        },
+        italicFontUrl: {
+            control: 'text'
+        },
+        boldItalicFontUrl: {
+            control: 'text'
         }
     },
     render: ( props ) => (
@@ -34,6 +49,9 @@ export default {
                 <View margin='small'>
                     <Text color="brand" size="xx-large">Brand Text</Text>
                 </View>
+                <View margin='small'>
+                    <p>Regular, <b>bold</b>, <i>italic</i>, and <b><i>bold italic</i></b> text</p>
+                </View>
             </div>
         </LtiPageSettings>
     )
@@ -41,4 +59,10 @@ export default {
 
 export const NoArgs = {
     args: {}
+}
+
+export const DyslexicFont = {
+    args: {
+        useDyslexicFont: true
+    }
 }

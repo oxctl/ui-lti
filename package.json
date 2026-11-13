@@ -9,6 +9,7 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
+      "node": "./dist/ui-lti.cjs",
       "import": "./dist/ui-lti.js",
       "require": "./dist/ui-lti.cjs"
     }
