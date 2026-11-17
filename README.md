@@ -13,6 +13,70 @@ If you want to add this library to your React tool you can add it with:
 
     npm install --save @oxctl/ui-lti
 
+### Canvas page settings
+
+`LtiPageSettings` retrieves Canvas page settings and applies branding and
+high-contrast themes. It also supports OpenDyslexic, controlled by the
+optional `useDyslexicFont` boolean prop (default `false`):
+
+```jsx
+import { LtiPageSettings } from '@oxctl/ui-lti'
+
+<LtiPageSettings useDyslexicFont={dyslexicFontPreference === 'true'}>
+  <App />
+</LtiPageSettings>
+```
+
+In this example, `dyslexicFontPreference` is the string value provided by your
+application's LTI launch configuration using `Canvas.user.prefersDyslexicFont`.
+
+### OpenDyslexic font
+
+Enable `useDyslexicFont` on `LtiPageSettings` to use OpenDyslexic for descendant
+HTML and Instructure UI components, including Instructure components rendered in portals.
+The library bundles OpenDyslexic regular, bold, italic, and bold-italic fonts,
+so no font URLs or external font service are needed. Each variant is registered
+with its matching weight (400 or 700) and style (normal or italic), so `<b>`,
+`<strong>`, `<i>`, `<em>`, and their combinations use the actual font variants.
+
+The component preserves branding and high-contrast settings. It adds a `div`
+around its children, even when disabled, and overrides their
+font families, including explicit styles on form controls. The browser uses
+sans-serif until the requested font variant loads. The bundled fonts are separate
+assets, not embedded in JavaScript. Their font-face definitions are always
+present, but the browser downloads only variants it uses. Your application build must
+resolve `?url` font imports and serve the emitted font files (Vite supports
+this by default); permit their origin in your Content Security Policy's
+`font-src`.
+
+Each optional URL prop overrides just its matching variant; omitted URLs use
+the corresponding bundled fonts:
+
+```jsx
+<LtiPageSettings
+  useDyslexicFont
+  fontUrl="/fonts/OpenDyslexic-Regular.woff2"
+  boldFontUrl="/fonts/OpenDyslexic-Bold.woff2"
+  italicFontUrl="/fonts/OpenDyslexic-Italic.woff2"
+  boldItalicFontUrl="/fonts/OpenDyslexic-BoldItalic.woff2"
+>
+  <App />
+</LtiPageSettings>
+```
+
+The bundled fonts are from
+[`@fontsource/opendyslexic` 5.3.0](https://www.npmjs.com/package/@fontsource/opendyslexic/v/5.3.0)
+and are redistributed under the
+[SIL Open Font License 1.1](src/components/LtiPageSettings/fonts/LICENSE).
+
+The optional `useDyslexicFont` prop defaults to `false`, leaving the surrounding theme
+and child fonts unchanged without applying the font. Set it to `true` to
+apply OpenDyslexic.
+Toggling it preserves child state and keeps the wrapper `div` in place.
+The component does not detect Canvas preferences; the consuming application can
+pass the user's dyslexia-font preference as `useDyslexicFont`. Plain HTML rendered into
+a portal outside the component, shadow roots, and iframe contents are not affected
+by its descendant styles.
 
 ## Available Scripts
 
